@@ -7,7 +7,9 @@ Bem-vindo ao diretório de exercícios da disciplina de Estrutura de Dados! Este
 O repositório está organizado da seguinte forma:
 
 Estrutura-de-dados-UFMG/: Este é o diretório principal onde todos os exercícios estão organizados. Cada exercício possui sua própria pasta numerada, contendo os arquivos relacionados a ele.
+
 ufmg_pds2_exercicios/atv[Número do Exercício]: Cada pasta numerada contém os arquivos específicos do exercício correspondente, incluindo códigos-fonte, recursos adicionais, bibliotecas e documentação relevante.
+
 Cada pasta de exercício contém um arquivo README.md que fornece informações detalhadas sobre o exercício, incluindo a descrição do problema, instruções de execução e dicas, se aplicável.
 
 # Execução dos Exercícios
