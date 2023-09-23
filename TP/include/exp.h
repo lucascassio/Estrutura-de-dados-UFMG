@@ -6,9 +6,7 @@
 
 using namespace std;
 
-void assignValues(string logicExpression, string values);
-int logicExpRes(string logicExpression, string values);
-int satisfabilityRes(string logicExpression, string values);
+void AvaliaExpressao(string expressao, string valoracao);
+void VerficaSatisfabilidade(string expressao, string valoracao);
 
 #endif
-

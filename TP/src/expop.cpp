@@ -1,4 +1,6 @@
 #include "../include/exp.h"
+#include "../include/pilhaEncadeada.h"
+#include "../include/arvoreBinaria.h"
 #include <string>
 
 using namespace std;
