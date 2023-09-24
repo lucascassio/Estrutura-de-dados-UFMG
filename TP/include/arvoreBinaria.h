@@ -1,4 +1,4 @@
-#ifndef ARVOREBINARIA_H
+/*#ifndef ARVOREBINARIA_H
 #define ARVOREBINARIA_H
 
 #include "../include/pilhaEncadeada.h"
@@ -29,3 +29,4 @@ private:
 };
 
 #endif
+*/

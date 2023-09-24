@@ -1,5 +1,9 @@
-#include "../include/arvoreBinaria.h"
+/*#include "../include/arvoreBinaria.h"
 #include "../include/pilhaEncadeada.h"
+
+#include <iostream>
+
+using namespace std;
 
 ArvoreBinaria::ArvoreBinaria() {
     raiz = nullptr;
@@ -81,3 +85,4 @@ void ArvoreBinaria::PreOrdem(Node *p) {
         PreOrdem(p->dir);
     }
 }
+*/

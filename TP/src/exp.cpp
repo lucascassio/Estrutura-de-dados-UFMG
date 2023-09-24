@@ -2,15 +2,122 @@
 #include "../include/pilhaEncadeada.h"
 #include "../include/arvoreBinaria.h"
 
+#include <iostream>
 #include <string>
 
 using namespace std;
 
-void assignValues(string logicExpression, string values) {
+bool isDigit(char c) {
+    return c >= '0' && c <= '9';
 }
 
-int logicExpRes(string logicExpression, string values) {
-
+string atribuiVariaveis(string expressao, string valoracao) {
+    for (char& c : expressao) {
+        if (isDigit(c)) {
+            int index = c - '0';
+            c = valoracao[index];
+        }
+    }
+    return expressao;
 }
 
-void satisfabilityRes();
+bool ehOp(char c) {
+    return c == '&' || c == '|' || c == '~';
+}
+
+int charToInt(char c) {
+    return c - '0';
+}
+
+// Function to convert an integer to a character
+char intToChar(int num) {
+    return static_cast<char>(num + '0');
+}
+
+int precedencia(char op) {
+    if (op == '&') return 1;
+    if (op == '|') return 2;
+    if (op == '~') return 3;
+    return 0;
+}
+
+int operacao(int x, int y, char op) {
+    if (op == '&') return x * y;
+    if (op == '|') { 
+        if(x == 1 && y == 1) {
+            return 1;
+        } else {
+            return x + y;
+        }
+    } 
+    if (op == '~') return !x;
+    return 0;
+}
+
+void AvaliaExpressao(string expressao, string valoracao) {
+    PilhaEncadeada binarios;
+    PilhaEncadeada operacoes;
+
+    for (char c : expressao) {
+        if (c == ' ') {
+            continue;
+        } 
+
+        else if (c == '(') {
+            operacoes.Empilha(c);
+        } 
+
+        else if (isDigit(c)) {
+            binarios.Empilha(charToInt(c));
+        } 
+
+        else if (c == ')') {
+            while (!operacoes.EstaVazia() && operacoes.Topo() != '(') {
+                int val2 = binarios.Desempilha();
+                int val1 = binarios.Desempilha();
+                char op = operacoes.Desempilha();
+                binarios.Empilha(operacao(val1, val2, op));
+            }
+            if (!operacoes.EstaVazia())
+                operacoes.Desempilha();
+        } 
+
+        else if (c == '~') {
+            operacoes.Empilha(c);
+        } 
+
+        else if (ehOp(c)) {
+            while (!operacoes.EstaVazia() && precedencia(operacoes.Topo()) >= precedencia(c)) {
+                char op = operacoes.Desempilha();
+                if (op == '~') {
+                    int val = binarios.Desempilha();
+                    binarios.Empilha(!val);
+                } else {
+                    int val2 = binarios.Desempilha();
+                    int val1 = binarios.Desempilha();
+                    binarios.Empilha(operacao(val1, val2, op));
+                }
+            }
+            operacoes.Empilha(c);
+        }
+
+    }
+
+    while (!operacoes.EstaVazia()) {
+        char op = operacoes.Desempilha();
+        if (op == '~') {
+            int val = binarios.Desempilha();
+            binarios.Empilha(!val);
+        } else {
+            int val2 = binarios.Desempilha();
+            int val1 = binarios.Desempilha();
+            binarios.Empilha(operacao(val1, val2, op));
+        }
+    }
+
+    int result = binarios.Desempilha();
+
+    cout << "Resultado da expressao: " << result << "\n";
+}
+
+void VerificaSatisfabilidade(string expressao, string valoracao);

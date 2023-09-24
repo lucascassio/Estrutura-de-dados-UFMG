@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/expop.o $(OBJ)/exp.o
-HDRS = $(INC)/exp.h
+OBJS = $(OBJ)/expop.o $(OBJ)/exp.o $(OBJ)/pilhaEncadeada.o $(OBJ)/arvoreBinaria.o
+HDRS = $(INC)/exp.h $(INC)/pilhaEncadeada.h $(INC)/arvoreBinaria.h
 CFLAGS = -Wall -I$(INC) -pg -c -g
 
 EXE = $(BIN)/tp1.exe
@@ -21,5 +21,11 @@ $(OBJ)/expop.o: $(HDRS) $(SRC)/expop.cpp
 $(OBJ)/exp.o: $(HDRS) $(SRC)/exp.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/exp.o $(SRC)/exp.cpp
 
+$(OBJ)/pilhaEncadeada.o: $(HDRS) $(SRC)/pilhaEncadeada.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/pilhaEncadeada.o $(SRC)/pilhaEncadeada.cpp
+
+$(OBJ)/arvoreBinaria.o: $(HDRS) $(SRC)/arvoreBinaria.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/arvoreBinaria.o $(SRC)/arvoreBinaria.cpp
+
 clean:
-	rm -f $(EXE) $(OBJS) gmon.out
+	rm -f $(EXE) $(OBJS) ./bin/gmon.out

@@ -1,27 +1,25 @@
 #ifndef PILHAENCADEADA_H
 #define PILHAENCADEADA_H
 
-#include <string>
-
-using namespace std;
-
 struct Node {
-    string item;
+    char item;
     Node* prox;
 };
 
 class PilhaEncadeada {
-    public:
+public:
     PilhaEncadeada();
-    virtual ~PilhaEncadeada();
-    void Empilha(string item); 
-    string Desempilha();
+    ~PilhaEncadeada();
+    void Empilha(char item);
+    char Desempilha();
     void Limpa();
     int getTamanho();
+    char Topo() const;
+    bool EstaVazia() const;
 
-    private:
-        int tamanho = 0;
-        Node* topo;
-    };
+private:
+    int tamanho = 0;
+    Node* topo;
+};
 
 #endif
