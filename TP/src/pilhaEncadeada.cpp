@@ -31,7 +31,7 @@ bool PilhaEncadeada::EstaVazia() const {
 }
 
 char PilhaEncadeada::Desempilha() {
-    char aux = '\0';  // Valor nulo se a pilha estiver vazia
+    char aux = '\0'; 
     if (tamanho != 0) {
         aux = topo->item;
         Node* p = topo;

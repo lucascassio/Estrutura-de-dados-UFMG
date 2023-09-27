@@ -29,14 +29,9 @@ int charToInt(char c) {
     return c - '0';
 }
 
-// Function to convert an integer to a character
-char intToChar(int num) {
-    return static_cast<char>(num + '0');
-}
-
 int precedencia(char op) {
-    if (op == '&') return 1;
-    if (op == '|') return 2;
+    if (op == '&') return 2;
+    if (op == '|') return 1;
     if (op == '~') return 3;
     return 0;
 }
@@ -72,11 +67,18 @@ void AvaliaExpressao(string expressao, string valoracao) {
         } 
 
         else if (c == ')') {
-            while (!operacoes.EstaVazia() && operacoes.Topo() != '(') {
-                int val2 = binarios.Desempilha();
-                int val1 = binarios.Desempilha();
-                char op = operacoes.Desempilha();
-                binarios.Empilha(operacao(val1, val2, op));
+            while (operacoes.Topo() != '(') {
+                if(operacoes.Topo() == '~') {
+                    char op = operacoes.Desempilha();
+                    int val1 = operacoes.Desempilha();
+                    binarios.Empilha(operacao(val1, 0, op));
+                } else {
+                    int val1 = binarios.Desempilha();
+                    int val2 = binarios.Desempilha();
+                    char op = operacoes.Desempilha();
+                    binarios.Empilha(operacao(val1, val2, op));
+                }
+
             }
             if (!operacoes.EstaVazia())
                 operacoes.Desempilha();
