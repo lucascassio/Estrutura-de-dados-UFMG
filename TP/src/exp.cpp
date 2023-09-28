@@ -118,6 +118,9 @@ void AvaliaExpressao(string expressao, string valoracao) {
     }
 
     int result = binarios.Desempilha();
+    
+    binarios.Limpa();
+    operacoes.Limpa();
 
     cout << "Resultado da expressao: " << result << "\n";
 }

@@ -1,32 +1,30 @@
-/*#ifndef ARVOREBINARIA_H
+#ifndef ARVOREBINARIA_H
 #define ARVOREBINARIA_H
 
 #include "../include/pilhaEncadeada.h"
 #include <iostream>
 
-struct Node {
-    std::string item;
-    Node* esq;
-    Node* dir;
+struct TipoNo {
+    string item;
+    TipoNo* esq;
+    TipoNo* dir;
 };
 
 class ArvoreBinaria {
 public:
     ArvoreBinaria();
     ~ArvoreBinaria();
-    void ConstruirArvore(PilhaEncadeada& pilha);
+    void Insere(string item);
     void Caminha(int tipo);
     void Limpa();
-
 private:
-    void InsereRecursivo(Node* &p, PilhaEncadeada& pilha);
-    void ApagaRecursivo(Node* p);
-    void PreOrdem(Node* p);
-    void InOrdem(Node* p);
-    void PosOrdem(Node* p);
-
-    Node* raiz;
+    void InsereRecursivo(TipoNo* &p, string item); 
+    void ApagaRecursivo(TipoNo* p);
+    void PorNivel();
+    void PreOrdem(TipoNo* p);
+    void InOrdem(TipoNo* p);
+    void PosOrdem(TipoNo* p);
+    TipoNo *raiz;
 };
 
 #endif
-*/

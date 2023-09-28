@@ -3,6 +3,7 @@
 
 PilhaEncadeada::PilhaEncadeada() {
     topo = nullptr;
+    tamanho = 0;
 } 
 
 PilhaEncadeada::~PilhaEncadeada() {

@@ -1,5 +1,6 @@
-/*#include "../include/arvoreBinaria.h"
+#include "../include/arvoreBinaria.h"
 #include "../include/pilhaEncadeada.h"
+#include "../include/exp.h"
 
 #include <iostream>
 
@@ -13,39 +14,20 @@ ArvoreBinaria::~ArvoreBinaria() {
     Limpa();
 }
 
-void ArvoreBinaria::ConstruirArvore(PilhaEncadeada& pilha) {
-    if (pilha.getTamanho() == 0) {
-        return;
-    }
-
-    InsereRecursivo(raiz, pilha);
+void ArvoreBinaria::Insere(string item){
+    InsereRecursivo(raiz,item);
 }
 
-void ArvoreBinaria::InsereRecursivo(Node* &p, PilhaEncadeada& pilha) {
-    if (pilha.getTamanho() == 0) {
-        return;
-    }
-
-    std::string topo = pilha.Desempilha();
-
-    // Verifique se o topo da pilha é um operador ou operando
-    bool isOperator = (topo == "|" || topo == "&");
-
-    if (isOperator) {
-        p = new Node();
-        p->item = topo;
-
-        // Construa a subárvore à esquerda (menor precedência)
-        InsereRecursivo(p->esq, pilha);
-
-        // Construa a subárvore à direita (maior precedência)
-        InsereRecursivo(p->dir, pilha);
+void ArvoreBinaria::InsereRecursivo(TipoNo* &p, string item){
+    if(p==NULL){
+        p = new TipoNo();
+        p->item = item;
     } else {
-        // É um operando
-        p = new Node();
-        p->item = topo;
-        p->esq = nullptr;
-        p->dir = nullptr;
+        if(item < p->item) {
+            InsereRecursivo(p->esq, item);
+        } else {
+            InsereRecursivo(p->dir, item);
+        }
     }
 }
 
@@ -54,7 +36,7 @@ void ArvoreBinaria::Limpa() {
     raiz = nullptr;
 }
 
-void ArvoreBinaria::ApagaRecursivo(Node* p) {
+void ArvoreBinaria::ApagaRecursivo(TipoNo* p) {
     if (p != nullptr) {
         ApagaRecursivo(p->esq);
         ApagaRecursivo(p->dir);
@@ -62,7 +44,7 @@ void ArvoreBinaria::ApagaRecursivo(Node* p) {
     }
 }
 
-void ArvoreBinaria::PosOrdem(Node *p) { 
+void ArvoreBinaria::PosOrdem(TipoNo *p) { 
     if (p != nullptr) {
         PosOrdem(p->esq); 
         PosOrdem(p->dir); 
@@ -70,7 +52,7 @@ void ArvoreBinaria::PosOrdem(Node *p) {
     } 
 }
 
-void ArvoreBinaria::InOrdem(Node *p) { 
+void ArvoreBinaria::InOrdem(TipoNo *p) { 
     if (p != nullptr) {
         InOrdem(p->esq);
         cout << p->item << " "; // Imprima ou faça a operação que deseja
@@ -78,11 +60,26 @@ void ArvoreBinaria::InOrdem(Node *p) {
     }
 }
 
-void ArvoreBinaria::PreOrdem(Node *p) { 
+void ArvoreBinaria::PreOrdem(TipoNo *p) { 
     if (p != nullptr) {
         cout << p->item << " "; // Imprima ou faça a operação que deseja
         PreOrdem(p->esq);
         PreOrdem(p->dir);
     }
 }
-*/
+
+void ArvoreBinaria::Caminha(int tipo) {
+    switch (tipo) {
+        case 1: // Pré-ordem
+            PreOrdem(raiz);
+            break;
+        case 2: // Em ordem
+            InOrdem(raiz);
+            break;
+        case 3: // Pós-ordem
+            PosOrdem(raiz);
+            break;
+        default:
+            std::cerr << "Tipo de caminhamento inválido!" << std::endl;
+    }
+}

@@ -18,7 +18,7 @@ public:
     bool EstaVazia() const;
 
 private:
-    int tamanho = 0;
+    int tamanho;
     Node* topo;
 };
 
