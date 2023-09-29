@@ -15,7 +15,7 @@ string atribuiVariaveis(string expressao, string valoracao) {
     for (char& c : expressao) {
         if (isDigit(c)) {
             int index = c - '0';
-            c = valoracao[index];
+            c = valoracao[index]; 
         }
     }
     return expressao;
@@ -49,7 +49,7 @@ int operacao(int x, int y, char op) {
     return 0;
 }
 
-void AvaliaExpressao(string expressao, string valoracao) {
+int AvaliaExpressao(string expressao, string valoracao) {
     PilhaEncadeada binarios;
     PilhaEncadeada operacoes;
 
@@ -122,7 +122,11 @@ void AvaliaExpressao(string expressao, string valoracao) {
     binarios.Limpa();
     operacoes.Limpa();
 
-    cout << "Resultado da expressao: " << result << "\n";
+    return result;
+}
+
+string getExpressao(string expressao) {
+    return expressao;
 }
 
 void VerificaSatisfabilidade(string expressao, string valoracao);

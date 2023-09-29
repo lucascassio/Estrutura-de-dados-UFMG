@@ -13,7 +13,7 @@ void atribuirValor(int valoresVariaveis[], const string& expressao, const char* 
 void intPstring(int num, string& str);
 int precendencia(char op);
 int operacao(int x, int y, char op);
-void AvaliaExpressao(string expressao, string valoracao);
+int AvaliaExpressao(string expressao);
 void VerficaSatisfabilidade(string expressao, string valoracao);
 
 #endif
