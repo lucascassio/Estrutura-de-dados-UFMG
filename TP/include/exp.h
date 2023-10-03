@@ -1,19 +1,16 @@
 #ifndef EXP_H
 #define EXP_H
 
-#include <iostream>
 #include <string>
 
-using namespace std;
+bool ehDigito(char c);
+std::string intParaString(int num);
+std::string atribuiVariaveis(std::string expressao, std::string valoracao);
+bool ehOperador(char c);
+int charParaInteiro(char c);
+int precedencia(char operador);
+int operacao(int x, int y, char operador);
+int avaliaExpressao(std::string expressao);
+void VerificaSatisfabilidade(std::string expressao, std::string valoracao);
 
-int stringPint(string str);
-string atribuiVariaveis(string expressao, string valoracao);
-bool ehOp(char c);
-void atribuirValor(int valoresVariaveis[], const string& expressao, const char* valoracao, int valoracaoLength);
-void intPstring(int num, string& str);
-int precendencia(char op);
-int operacao(int x, int y, char op);
-int AvaliaExpressao(string expressao);
-void VerficaSatisfabilidade(string expressao, string valoracao);
-
-#endif
+#endif 

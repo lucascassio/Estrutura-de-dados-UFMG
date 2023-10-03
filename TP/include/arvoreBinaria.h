@@ -19,7 +19,7 @@ public:
     void ConstroiArvore(string item);
     void Caminha(int tipo);
     void Limpa();
-    string CaminhaEInsere(string expressao, TipoNo *p);
+    void CaminhaEAvaliaRecursivo(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao);
     TipoNo* getRaiz();
 private:
     void ConstroiRecursivo(TipoNo* &p, string item, int pos); 

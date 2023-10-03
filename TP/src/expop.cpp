@@ -18,17 +18,9 @@ int main(int argc, char **argv) {
 
     if(problema == "-a") {
         string expressaoLogicaBinaria = atribuiVariaveis(expressaoLogica, valoracao);
-        cout << AvaliaExpressao(expressaoLogicaBinaria) << endl;
+        cout << avaliaExpressao(expressaoLogicaBinaria) << endl;
     } else if(problema == "-s") {
-        ArvoreBinaria arvoreDeValoracao;
-        arvoreDeValoracao.ConstroiArvore(valoracao);
-        TipoNo* raiz = arvoreDeValoracao.getRaiz();
-        string result = arvoreDeValoracao.CaminhaEInsere(expressaoLogica, raiz);
-        if(result == "") {
-            cout << 0;
-        } else {
-            cout << 1 << " " << result << endl;
-        }
+        VerificaSatisfabilidade(expressaoLogica, valoracao);
     }
     return 0;
 }

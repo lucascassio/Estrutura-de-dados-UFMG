@@ -8,7 +8,7 @@ OBJS = $(OBJ)/expop.o $(OBJ)/exp.o $(OBJ)/pilhaEncadeada.o $(OBJ)/arvoreBinaria.
 HDRS = $(INC)/exp.h $(INC)/pilhaEncadeada.h $(INC)/arvoreBinaria.h
 CFLAGS = -Wall -I$(INC) -pg -c -g
 
-EXE = $(BIN)/tp1.exe
+EXE = $(BIN)/tp1.out
 
 all: $(EXE)
 
@@ -28,4 +28,4 @@ $(OBJ)/arvoreBinaria.o: $(HDRS) $(SRC)/arvoreBinaria.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/arvoreBinaria.o $(SRC)/arvoreBinaria.cpp
 
 clean:
-	rm -f $(EXE) $(OBJS) ./bin/gmon.out
+	rm -f $(EXE) $(OBJS) ./bin/gmon.out ./bin/tp1.exe
