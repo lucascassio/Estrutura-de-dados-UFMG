@@ -1,6 +1,6 @@
-#include "../include/exp.h"
-#include "../include/pilhaEncadeada.h"
-#include "../include/arvoreBinaria.h"
+#include "../include/exp.hpp"
+#include "../include/pilhaEncadeada.hpp"
+#include "../include/arvoreBinaria.hpp"
 
 #include <iostream>
 #include <string>

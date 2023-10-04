@@ -1,7 +1,7 @@
 #ifndef ARVOREBINARIA_H
 #define ARVOREBINARIA_H
 
-#include "../include/pilhaEncadeada.h"
+#include "../include/pilhaEncadeada.hpp"
 #include <iostream>
 
 using namespace std;

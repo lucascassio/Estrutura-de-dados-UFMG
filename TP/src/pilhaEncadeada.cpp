@@ -1,4 +1,4 @@
-#include "../include/pilhaEncadeada.h"
+#include "../include/pilhaEncadeada.hpp"
 #include <iostream>
 
 // Construtor da classe PilhaEncadeada
