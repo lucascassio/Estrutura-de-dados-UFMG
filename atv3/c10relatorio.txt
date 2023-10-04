@@ -1,0 +1,63 @@
+1-
+O erro estava na alocação contínua de memória dentro de um loop infinito
+
+2-
+==8696== Process terminating with default action of signal 2 (SIGINT)
+==8696==    at 0x497EA35: write (write.c:26)
+==8696==    by 0x48F4F6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==8696==    by 0x48F6A60: new_do_write (fileops.c:448)
+==8696==    by 0x48F6A60: _IO_new_do_write (fileops.c:425)
+==8696==    by 0x48F6A60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==8696==    by 0x48F5754: _IO_new_file_xsputn (fileops.c:1243)
+==8696==    by 0x48F5754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==8696==    by 0x48E0049: outstring_func (vfprintf-internal.c:239)
+==8696==    by 0x48E0049: __vfprintf_internal (vfprintf-internal.c:1593)
+==8696==    by 0x48CA81E: printf (printf.c:33)
+==8696==    by 0x10919D: main (c10.c:10)
+==8696== 
+==8696== HEAP SUMMARY:
+==8696==     in use at exit: 430,645,504 bytes in 3,364,411 blocks
+==8696==   total heap usage: 3,364,411 allocs, 0 frees, 430,645,504 bytes allocated
+==8696== 
+==8696== LEAK SUMMARY:
+==8696==    definitely lost: 430,643,584 bytes in 3,364,403 blocks
+==8696==    indirectly lost: 0 bytes in 0 blocks
+==8696==      possibly lost: 768 bytes in 6 blocks
+==8696==    still reachable: 1,152 bytes in 2 blocks
+==8696==         suppressed: 0 bytes in 0 blocks
+==8696== Rerun with --leak-check=full to see details of leaked memory
+==8696== 
+==8696== For lists of detected and suppressed errors, rerun with: -s
+==8696== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+3-
+O código foi corrigido adicionando uma verificação para alocar memória.
+
+4-
+==8988== Process terminating with default action of signal 2 (SIGINT)
+==8988==    at 0x497EA35: write (write.c:26)
+==8988==    by 0x48F4F6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==8988==    by 0x48F6A60: new_do_write (fileops.c:448)
+==8988==    by 0x48F6A60: _IO_new_do_write (fileops.c:425)
+==8988==    by 0x48F6A60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==8988==    by 0x48F5754: _IO_new_file_xsputn (fileops.c:1243)
+==8988==    by 0x48F5754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==8988==    by 0x48E0049: outstring_func (vfprintf-internal.c:239)
+==8988==    by 0x48E0049: __vfprintf_internal (vfprintf-internal.c:1593)
+==8988==    by 0x48CA81E: printf (printf.c:33)
+==8988==    by 0x1091BD: main (c10correto.c:9)
+==8988== 
+==8988== HEAP SUMMARY:
+==8988==     in use at exit: 1,152 bytes in 2 blocks
+==8988==   total heap usage: 278,215 allocs, 278,213 frees, 35,612,416 bytes allocated
+==8988== 
+==8988== LEAK SUMMARY:
+==8988==    definitely lost: 0 bytes in 0 blocks
+==8988==    indirectly lost: 0 bytes in 0 blocks
+==8988==      possibly lost: 0 bytes in 0 blocks
+==8988==    still reachable: 1,152 bytes in 2 blocks
+==8988==         suppressed: 0 bytes in 0 blocks
+==8988== Rerun with --leak-check=full to see details of leaked memory
+==8988== 
+==8988== For lists of detected and suppressed errors, rerun with: -s
+==8988== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

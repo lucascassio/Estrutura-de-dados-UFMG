@@ -1,0 +1,47 @@
+1-
+A variavel era verificada antes de ser inicializada.
+
+2-
+==9222== Memcheck, a memory error detector
+==9222== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9222== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9222== Command: ./teste
+==9222== 
+==9222== Conditional jump or move depends on uninitialised value(s)
+==9222==    at 0x109159: main (c12.c:6)
+==9222== 
+X is zero==9222== 
+==9222== HEAP SUMMARY:
+==9222==     in use at exit: 0 bytes in 0 blocks
+==9222==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==9222== 
+==9222== All heap blocks were freed -- no leaks are possible
+==9222== 
+==9222== Use --track-origins=yes to see where uninitialised values come from
+==9222== For lists of detected and suppressed errors, rerun with: -s
+==9222== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+3-
+Só foi inicializada a variável.
+
+4-
+==9275== Memcheck, a memory error detector
+==9275== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9275== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9275== Command: ./teste
+==9275== 
+==9275== 
+==9275== HEAP SUMMARY:
+==9275==     in use at exit: 16 bytes in 1 blocks
+==9275==   total heap usage: 3 allocs, 2 frees, 47 bytes allocated
+==9275== 
+==9275== LEAK SUMMARY:
+==9275==    definitely lost: 16 bytes in 1 blocks
+==9275==    indirectly lost: 0 bytes in 0 blocks
+==9275==      possibly lost: 0 bytes in 0 blocks
+==9275==    still reachable: 0 bytes in 0 blocks
+==9275==         suppressed: 0 bytes in 0 blocks
+==9275== Rerun with --leak-check=full to see details of leaked memory
+==9275== 
+==9275== For lists of detected and suppressed errors, rerun with: -s
+==9275== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,30 +1,27 @@
 CC = gcc
-CFLAGS = -std=c11 -Wall
+LIBS = -lm -pg
 SRC = src
 OBJ = obj
-BIN = bin
 INC = include
-OBJS = $(OBJ)/testeFatIterativo.o $(OBJ)/testeFibIterativo.o $(OBJ)/testeFatRecursivo.o $(OBJ)/testeFibRecursivo.o
-EXE = $(BIN)/testeFatIterativo $(BIN)/testeFatRecursivo $(BIN)/testeFibIterativo $(BIN)/testeFibRecursivo
+BIN = bin
+OBJS = $(OBJ)/testesop.o $(OBJ)/testes.o
+HDRS = $(INC)/testes.h
+CFLAGS = -Wall -I$(INC) -pg -c -g
 
-MAIN_SOURCE = $(SRC)/testes.c
-CONTRACT_SOURCE = $(SRC)/testesop.c
+EXE = $(BIN)/testes
 
-EXECUTABLE = $(BIN)/main
+run:  $(EXE)
+	$(EXE) 5
 
-ARGUMENT = 20
+$(BIN)/testes: $(OBJS)
+	$(CC) -pg -o $(BIN)/testes $(OBJS) $(LIBS)
 
-all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(MAIN_SOURCE) $(CONTRACT_SOURCE)
-	$(CC) $(CFLAGS) -I$(INC) -o $@ $^
-	@echo "Compilado: $@"
+$(OBJ)/testesop.o: $(HDRS) $(SRC)/testesop.c
+	$(CC) $(CFLAGS) -o $(OBJ)/testesop.o $(SRC)/testesop.c 
 
-run: $(EXECUTABLE)
-	@echo "Executando programa com argumento: $(ARGUMENT)"
-	@./$(EXECUTABLE) $(ARGUMENT)
+$(OBJ)/testes.o: $(HDRS) $(SRC)/testes.c
+	$(CC) $(CFLAGS) -o $(OBJ)/testes.o $(SRC)/testes.c 
 
 clean:
-	rm -f $(EXECUTABLE) $(OBJS) $(EXE)
-
-.PHONY: all clean run analyze
+	rm -f $(EXE) $(OBJS) gmon.out

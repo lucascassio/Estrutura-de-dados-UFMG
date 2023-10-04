@@ -2,8 +2,17 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/resource.h>
+#include <math.h>
 
 #include "../include/testes.h"
+
+/*double computeSin() {
+    double result = 0.0;
+    for (int i = 0; i < 1500000; i++) {
+        result += sin(0);
+    }
+    return result;
+}*/
 
 long long int FatItr(int n) {
     long long int f = 1;
@@ -35,11 +44,10 @@ long long int FibItr(int n) {
 }
 
 
-long long int FibRec(int n) {
-    if(n < 3) {
-        return 1;
+long long FibRec(int n) {
+    if (n <= 1) {
+        return n;
     } else {
         return FibRec(n - 1) + FibRec(n - 2);
     }
 }
-
