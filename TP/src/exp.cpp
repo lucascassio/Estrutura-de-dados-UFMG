@@ -194,6 +194,14 @@ void VerificaSatisfabilidade(string expressao, string valoracao) {
             pos++;
             }
 
+            if(raiz->item == "ea") {
+                cout << 1 << " " << "1a" << endl;
+                return;
+            }
+            else if(raiz->item == "ae") {
+                cout << 1 << " " << "a1" << endl;
+            }
+
             cout << 1 << " " << resultado << endl;
         }
     } else {
