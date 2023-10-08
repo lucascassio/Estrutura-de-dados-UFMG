@@ -5,7 +5,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/expop.o $(OBJ)/exp.o $(OBJ)/pilhaEncadeada.o $(OBJ)/arvoreBinaria.o
-HDRS = $(INC)/exp.h $(INC)/pilhaEncadeada.h $(INC)/arvoreBinaria.h
+HDRS = $(INC)/exp.hpp $(INC)/pilhaEncadeada.hpp $(INC)/arvoreBinaria.hpp
 CFLAGS = -Wall -I$(INC) -pg -c -g
 
 EXE = $(BIN)/tp1.out

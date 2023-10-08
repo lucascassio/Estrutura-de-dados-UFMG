@@ -17,10 +17,10 @@ int main(int argc, char **argv) {
     string valoracao = argv[3];
 
     if(problema == "-a") {
-        string expressaoLogicaBinaria = atribuiVariaveis(expressaoLogica, valoracao);
+        string expressaoLogicaBinaria = substituiValoresVariaveis(expressaoLogica, valoracao);
         cout << avaliaExpressao(expressaoLogicaBinaria) << endl;
     } else if(problema == "-s") {
-        VerificaSatisfabilidade(expressaoLogica, valoracao);
+        verificaSatisfatibilidade(expressaoLogica, valoracao);
     }
     return 0;
 }

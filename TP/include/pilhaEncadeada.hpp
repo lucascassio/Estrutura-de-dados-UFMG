@@ -10,16 +10,16 @@ class PilhaEncadeada {
 public:
     PilhaEncadeada();
     ~PilhaEncadeada();
-    void Empilha(char item);
-    char Desempilha();
-    void Limpa();
+    void empilha(char item);
+    char desempilha();
+    void limpa();
     int getTamanho();
-    char Topo() const;
-    bool EstaVazia() const;
+    bool estaVazia();
+    char topo();
 
 private:
     int tamanho;
-    Node* topo;
+    Node* Topo;
 };
 
 #endif
