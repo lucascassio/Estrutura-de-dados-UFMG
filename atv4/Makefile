@@ -6,7 +6,7 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/lista.o $(OBJ)/graph.o
 HDRS = $(INC)/graph.hpp $(INC)/lista.hpp
-CFLAGS = -Wall -I$(INC) -pg -c -g
+CFLAGS = -I$(INC) -pg -c
 
 EXE = $(BIN)/pa6.out
 
