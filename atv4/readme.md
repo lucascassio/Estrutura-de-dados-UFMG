@@ -25,6 +25,8 @@ As operações podem ser:
 A leitura dos dados do grafo se dará da seguinte forma:
 
 Um inteiro n indicando quantos vértices o grafo possui.
+
+
 As próximas n linhas contém as vizinhos de cada vértice. Um inteiro m indicando quantos vizinhos o vértice possi seguidos de m inteiros indicando cada vizinho.
 
 Exemplo:
