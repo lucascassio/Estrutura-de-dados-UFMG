@@ -3,14 +3,14 @@
 
 #include <string>
 
-bool ehDigito(char c);
-std::string intParaString(int num);
-std::string atribuiVariaveis(std::string expressao, std::string valoracao);
-bool ehOperador(char c);
-int charParaInteiro(char c);
-int precedencia(char operador);
-int operacao(int x, int y, char operador);
+bool caractereEhDigito(char c);
+std::string inteiroParaString(int num);
+std::string substituiValoresVariaveis(std::string expressao, std::string valoracao);
+bool caractereEhOperador(char c);
+int caractereParaInteiro(char c);
+int obtemPrecedenciaOperador(char operador);
+int realizaOperacao(int x, int y, char operador);
 int avaliaExpressao(std::string expressao);
-void VerificaSatisfabilidade(std::string expressao, std::string valoracao);
+void verificaSatisfatibilidade(std::string expressao, std::string valoracao);
 
 #endif 

@@ -1,7 +1,6 @@
 #ifndef ARVOREBINARIA_H
 #define ARVOREBINARIA_H
 
-#include "../include/pilhaEncadeada.hpp"
 #include <iostream>
 
 using namespace std;
@@ -16,18 +15,18 @@ class ArvoreBinaria {
 public:
     ArvoreBinaria();
     ~ArvoreBinaria();
-    void ConstroiArvore(string item);
-    void Caminha(int tipo);
-    void Limpa();
-    void CaminhaEAvaliaRecursivo(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao);
+    void constroiArvore(string item);
+    void caminha(int tipo);
+    void limpa();
+    void caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao);
     TipoNo* getRaiz();
 private:
-    void ConstroiRecursivo(TipoNo* &p, string item, int pos); 
-    void ApagaRecursivo(TipoNo* p);
-    void PorNivel();
-    void PreOrdem(TipoNo* p);
-    void InOrdem(TipoNo* p);
-    void PosOrdem(TipoNo* p);
+    void constroiRecursivo(TipoNo* &p, string item, int pos); 
+    void apagaRecursivo(TipoNo* p);
+    void porNivel();
+    void preOrdem(TipoNo* p);
+    void inOrdem(TipoNo* p);
+    void posOrdem(TipoNo* p);
     TipoNo *raiz;
 };
 

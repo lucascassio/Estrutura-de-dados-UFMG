@@ -1,64 +1,58 @@
 #include "../include/pilhaEncadeada.hpp"
 #include <iostream>
 
-// Construtor da classe PilhaEncadeada
+using namespace std;
+
 PilhaEncadeada::PilhaEncadeada() {
-    topo = nullptr;  // Inicializa o topo como nulo
+    Topo = nullptr;  // Inicializa o Topo como nulo
     tamanho = 0;     // Inicializa o tamanho como 0
 }
 
-// Destrutor da classe PilhaEncadeada
 PilhaEncadeada::~PilhaEncadeada() {
-    Limpa();  // Chama o método Limpa() para liberar a memória da pilha
+    limpa();  // Chama o método limpa() para liberar a memória da pilha
 } 
 
-// Método para empilhar um item
-void PilhaEncadeada::Empilha(char item) {
+void PilhaEncadeada::empilha(char item) {
     Node* novoNo = new Node();  // Cria um novo nó
     novoNo->item = item;  // Define o item do nó
-    novoNo->prox = topo;  // O próximo do novo nó aponta para o antigo topo
-    topo = novoNo;  // Atualiza o topo para o novo nó
+    novoNo->prox = Topo;  // O próximo do novo nó aponta para o antigo Topo
+    Topo = novoNo;  // Atualiza o Topo para o novo nó
     tamanho++;  // Incrementa o tamanho da pilha
 } 
 
-// Método para obter o elemento no topo da pilha
-char PilhaEncadeada::Topo() const {
-    if (topo != nullptr) {
-        return topo->item;  // Retorna o item do topo
+char PilhaEncadeada::topo() {
+    if (Topo != nullptr) {
+        return Topo->item;  // Retorna o item do Topo
     } else {
-        std::cout << "A pilha está vazia, não há topo.\n";
+        cout << "A pilha está vazia, não há Topo.\n";
         return '\0';  // Retorna um caractere nulo se a pilha estiver vazia
     }
 }
 
-// Método para verificar se a pilha está vazia
-bool PilhaEncadeada::EstaVazia() const {
+bool PilhaEncadeada::estaVazia() {
     return tamanho == 0;  // Retorna true se o tamanho for 0, indicando pilha vazia
 }
 
-// Método para desempilhar um item
-char PilhaEncadeada::Desempilha() {
+char PilhaEncadeada::desempilha() {
     char aux = '\0';  // Inicializa um caractere nulo auxiliar
     if (tamanho != 0) {
-        aux = topo->item;  // Armazena o item do topo a ser removido
-        Node* p = topo;  // Armazena o endereço do topo
-        topo = topo->prox;  // Atualiza o topo para o próximo nó
+        aux = Topo->item;  // Armazena o item do Topo a ser removido
+        Node* p = Topo;  // Armazena o endereço do Topo
+        Topo = Topo->prox;  // Atualiza o Topo para o próximo nó
         delete p;  // Libera a memória do nó a ser removido
         tamanho--;  // Decrementa o tamanho da pilha
     } else {
-        std::cout << "A pilha está vazia!" << std::endl;
+        cout << "A pilha está vazia!" << endl;
     }
     return aux;  // Retorna o item desempilhado (ou caractere nulo se a pilha estiver vazia)
 } 
 
-// Método para limpar a pilha e liberar memória
-void PilhaEncadeada::Limpa() {
+void PilhaEncadeada::limpa() {
     while (tamanho != 0) {
-        Desempilha();  // Desempilha até que a pilha esteja vazia
+        desempilha();  // Desempilha até que a pilha esteja vazia
     }
 }
 
-// Método para obter o tamanho da pilha
 int PilhaEncadeada::getTamanho() {
     return tamanho;  // Retorna o tamanho da pilha
 }

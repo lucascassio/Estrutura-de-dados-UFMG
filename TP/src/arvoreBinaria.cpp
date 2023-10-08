@@ -11,15 +11,14 @@ ArvoreBinaria::ArvoreBinaria() {
 }
 
 ArvoreBinaria::~ArvoreBinaria() {
-    Limpa();
+    limpa();
 }
 
-void ArvoreBinaria::ConstroiArvore(string item){
-    ConstroiRecursivo(raiz,item,0);
+void ArvoreBinaria::constroiArvore(string item){
+    constroiRecursivo(raiz, item, 0);
 }
 
-// Constroi a Arvore Recursivamente. Código garante que a arvore seja balanceada, para que as valoracoes sempre fique nas folhas
-void ArvoreBinaria::ConstroiRecursivo(TipoNo* &p, std::string item, int pos) {
+void ArvoreBinaria::constroiRecursivo(TipoNo* &p, std::string item, int pos) {
     if (item[pos] == '\0') {
         p = new TipoNo();
         p->item = item;
@@ -34,41 +33,41 @@ void ArvoreBinaria::ConstroiRecursivo(TipoNo* &p, std::string item, int pos) {
     char c = item[pos];
     if (c == 'a' || c == 'e') {
         item[pos] = '0';
-        ConstroiRecursivo(p->esq, item, pos + 1);
+        constroiRecursivo(p->esq, item, pos + 1);
 
         item[pos] = '1';
-        ConstroiRecursivo(p->dir, item, pos + 1);
+        constroiRecursivo(p->dir, item, pos + 1);
     } else {
-        ConstroiRecursivo(p, item, pos + 1);
+        constroiRecursivo(p, item, pos + 1);
     }
 }
 
-void ArvoreBinaria::Limpa() {
-    ApagaRecursivo(raiz);
+void ArvoreBinaria::limpa() {
+    apagaRecursivo(raiz);
     raiz = nullptr;
 }
 
-void ArvoreBinaria::ApagaRecursivo(TipoNo* p) {
+void ArvoreBinaria::apagaRecursivo(TipoNo* p) {
     if (p != nullptr) {
-        ApagaRecursivo(p->esq);
-        ApagaRecursivo(p->dir);
+        apagaRecursivo(p->esq);
+        apagaRecursivo(p->dir);
         delete p;
     }
 }
 
-void ArvoreBinaria::PosOrdem(TipoNo *p) { 
+void ArvoreBinaria::posOrdem(TipoNo *p) { 
     if (p != nullptr) {
-        PosOrdem(p->esq); 
-        PosOrdem(p->dir); 
+        posOrdem(p->esq); 
+        posOrdem(p->dir); 
         cout << p->item << " "; 
     } 
 }
 
-void ArvoreBinaria::InOrdem(TipoNo *p) { 
+void ArvoreBinaria::inOrdem(TipoNo *p) { 
     if (p != nullptr) {
-        InOrdem(p->esq);
+        inOrdem(p->esq);
         cout << p->item << " "; 
-        InOrdem(p->dir);
+        inOrdem(p->dir);
     }
 }
 
@@ -76,22 +75,21 @@ TipoNo* ArvoreBinaria::getRaiz() {
     return raiz;
 }
 
-void ArvoreBinaria::PreOrdem(TipoNo *p) { 
+void ArvoreBinaria::preOrdem(TipoNo *p) { 
     if (p != nullptr) {
         cout << p->item << " "; 
-        PreOrdem(p->esq);
-        PreOrdem(p->dir);
+        preOrdem(p->esq);
+        preOrdem(p->dir);
     }
 }
 
-// Codigo responsavel por caminhar na arvore binaria, interessado apenas nas folhas, onde estao todas as
-void ArvoreBinaria::CaminhaEAvaliaRecursivo(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao) {
+void ArvoreBinaria::caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao) {
     if (p == nullptr) {
-        cout << "Ponteiro para nó é nulo." << endl;
+        cout << "A raiz é NULA!! Impossivel prosseguir." << endl;
         return;
     }
     if (p->esq == nullptr && p->dir == nullptr) {
-        string expressaoLogicaBinaria = atribuiVariaveis(expressao, p->item);
+        string expressaoLogicaBinaria = substituiValoresVariaveis(expressao, p->item);
         int result = avaliaExpressao(expressaoLogicaBinaria);
         if (result == 1) {
             valoracao = p->item;
@@ -99,24 +97,23 @@ void ArvoreBinaria::CaminhaEAvaliaRecursivo(string expressao, TipoNo *p, bool& a
             aux++;
         }
     } else {
-        CaminhaEAvaliaRecursivo(expressao, p->esq, algumNoResultado1, aux, valoracao);
-        CaminhaEAvaliaRecursivo(expressao, p->dir, algumNoResultado1, aux, valoracao);
+        caminhaEAvalia(expressao, p->esq, algumNoResultado1, aux, valoracao);
+        caminhaEAvalia(expressao, p->dir, algumNoResultado1, aux, valoracao);
     }
 }
 
-
-void ArvoreBinaria::Caminha(int tipo) {
+void ArvoreBinaria::caminha(int tipo) {
     switch (tipo) {
         case 1: 
-            PreOrdem(raiz);
+            preOrdem(raiz);
             break;
         case 2: 
-            InOrdem(raiz);
+            inOrdem(raiz);
             break;
         case 3: 
-            PosOrdem(raiz);
+            posOrdem(raiz);
             break;
         default:
-            std::cerr << "Tipo de caminhamento inválido!" << std::endl;
+            std::cerr << "Tipo de caminhamento invalido" << std::endl;
     }
 }
