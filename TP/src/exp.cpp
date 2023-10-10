@@ -71,7 +71,7 @@ int obtemPrecedenciaOperador(char operador) {
 }
 
 // Função para executar operações binárias com base no operador
-int realizaOperacao(int x, int y, char operador) {
+int realizaOperacaoBinaria(int x, int y, char operador) {
     if (operador == '&') return x * y;
     if (operador == '|') { 
         if(x == 1 && y == 1) {
@@ -84,6 +84,19 @@ int realizaOperacao(int x, int y, char operador) {
     return 0;
 }
 
+// Função para realizar operações dentro de um parêntese
+void realizarOperacoes(PilhaEncadeada& binarios, PilhaEncadeada& operacoes) {
+    char operador = operacoes.desempilha();
+    if (operador == '~') {
+        int val1 = binarios.desempilha();
+        binarios.empilha(realizaOperacaoBinaria(val1, 0, operador));
+    } else {
+        int val1 = binarios.desempilha();
+        int val2 = binarios.desempilha();
+        binarios.empilha(realizaOperacaoBinaria(val1, val2, operador));
+    }
+}
+
 // Função para avaliar uma expressão dada
 int avaliaExpressao(string expressao) {
     PilhaEncadeada binarios;
@@ -91,77 +104,51 @@ int avaliaExpressao(string expressao) {
 
     // Percorre a expressão para avaliar as operações
     for (char c : expressao) {
-        if (c == ' ') {
+        if (c == ' ')
             continue;
-        } 
 
-        else if (c == '(') {
+        if (c == '(') {
             operacoes.empilha(c);
         } 
-
+        
         else if (caractereEhDigito(c)) {
             binarios.empilha(caractereParaInteiro(c));
         } 
-
+                
         // Realiza as operações dentro de um parêntese
         else if (c == ')') {
             while (operacoes.topo() != '(') {
-                if(operacoes.topo() == '~') {
-                    char operador = operacoes.desempilha();
-                    int val1 = binarios.desempilha();
-                    binarios.empilha(realizaOperacao(val1, 0, operador));
-                } else {
-                    int val1 = binarios.desempilha();
-                    int val2 = binarios.desempilha();
-                    char operador = operacoes.desempilha();
-                    binarios.empilha(realizaOperacao(val1, val2, operador));
-                }
+                realizarOperacoes(binarios, operacoes);
             }
-            if (!operacoes.estaVazia())
-                operacoes.desempilha();
+            operacoes.desempilha();
         } 
-
+        
         else if (c == '~') {
             operacoes.empilha(c);
         } 
-
+        
         // Realiza as operações com base na precedência dos operadores
         else if (caractereEhOperador(c)) {
             while (!operacoes.estaVazia() && obtemPrecedenciaOperador(operacoes.topo()) >= obtemPrecedenciaOperador(c)) {
-                char operador = operacoes.desempilha();
-                if (operador == '~') {
-                    int val = binarios.desempilha();
-                    binarios.empilha(!val);
-                } else {
-                    int val2 = binarios.desempilha();
-                    int val1 = binarios.desempilha();
-                    binarios.empilha(realizaOperacao(val1, val2, operador));
-                }
+                realizarOperacoes(binarios, operacoes);
             }
             operacoes.empilha(c);
         }
-    }   
+        
+    }
 
-    // Realiza as operações pendentes após percorrer toda a expressão
+    // Realiza as operações pendentes após percorrer toda a expressão, se caso existirem.
     while (!operacoes.estaVazia()) {
-        char operador = operacoes.desempilha();
-        if (operador == '~') {
-            int val = binarios.desempilha();
-            binarios.empilha(!val);
-        } else {
-            int val2 = binarios.desempilha();
-            int val1 = binarios.desempilha();
-            binarios.empilha(realizaOperacao(val1, val2, operador));
-        }
+        realizarOperacoes(binarios, operacoes);
     }
 
     int resultado = binarios.desempilha();
-    
-    binarios.limpa(); // Limpa a pilha de binários
-    operacoes.limpa(); // Limpa a pilha de operações
+    binarios.limpa();
+    operacoes.limpa();
 
     return resultado;
 }
+
 
 // Função para verificar a satisfatibilidade da expressão dada uma valoração
 void verificaSatisfatibilidade(string expressao, string valoracao) {
