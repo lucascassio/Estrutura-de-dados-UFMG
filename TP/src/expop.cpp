@@ -7,6 +7,7 @@
 using namespace std;
 
 int main(int argc, char **argv) {
+
     if (argc < 4) {
         cout << "Argumentos invalidos !!!";
         return 1;
@@ -22,5 +23,6 @@ int main(int argc, char **argv) {
     } else if(problema == "-s") {
         verificaSatisfatibilidade(expressaoLogica, valoracao);
     }
+
     return 0;
 }

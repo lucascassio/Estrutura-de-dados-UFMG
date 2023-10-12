@@ -26,31 +26,29 @@ string inteiroParaString(int num) {
 }
 
 // Função para substituir valores das variáveis na expressão com base em uma valoração
-string substituiValoresVariaveis(string expressao, string valoracao) {
-    char variaveis[MAXNVARIAVEIS]; 
-    
-    // Substitui valores das variáveis na expressão
-    for (int i = 0; i <= 100; ++i) {
-        if (i < 10) {
-            variaveis[i] = valoracao[i];
-        } else {
-            string numStr = inteiroParaString(i);
-            variaveis[i] = valoracao[numStr[0] - '0'];
-        }
-    }
+std::string substituiValoresVariaveis(string expressao, string valoracao) {
+    string expressaoValorada = "";
+    int val = 0;
+    int i = 0;
 
-    // Substitui os dígitos na expressão pelos valores correspondentes das variáveis
-    for (char& c : expressao) {
-        if (caractereEhDigito(c)) {
-            int indice = c - '0';
-            if (indice >= 0 && indice <= 100) {
-                c = variaveis[indice];
+    while (expressao[i] != '\0') {
+        if (!caractereEhDigito(expressao[i])) {
+            expressaoValorada += expressao[i];
+            val = 0;
+        } else if (caractereEhDigito(expressao[i])) {
+            val = (val * 10) + (expressao[i] - '0');
+            if (expressao[i + 1] != '\0' && caractereEhDigito(expressao[i + 1])) {
+                val = (val * 10) + (expressao[i + 1] - '0');
+                i++;
             }
+            expressaoValorada += valoracao[val];
         }
+        i++;
     }
 
-    return expressao;
+    return expressaoValorada;
 }
+
 
 // Função para verificar se um caractere é um operador
 bool caractereEhOperador(char c) {
