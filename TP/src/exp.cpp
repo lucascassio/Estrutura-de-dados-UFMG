@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 
-const int MAXNVARIAVEIS = 100;
-
 using namespace std;
 
 // Função para verificar se um caractere é um dígito
