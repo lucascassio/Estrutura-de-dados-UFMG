@@ -55,33 +55,10 @@ void ArvoreBinaria::apagaRecursivo(TipoNo* p) {
     }
 }
 
-void ArvoreBinaria::posOrdem(TipoNo *p) { 
-    if (p != nullptr) {
-        posOrdem(p->esq); 
-        posOrdem(p->dir); 
-        cout << p->item << " "; 
-    } 
-}
-
-void ArvoreBinaria::inOrdem(TipoNo *p) { 
-    if (p != nullptr) {
-        inOrdem(p->esq);
-        cout << p->item << " "; 
-        inOrdem(p->dir);
-    }
-}
-
 TipoNo* ArvoreBinaria::getRaiz() {
     return raiz;
 }
 
-void ArvoreBinaria::preOrdem(TipoNo *p) { 
-    if (p != nullptr) {
-        cout << p->item << " "; 
-        preOrdem(p->esq);
-        preOrdem(p->dir);
-    }
-}
 
 void ArvoreBinaria::caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao) {
     if (p == nullptr) {
@@ -99,21 +76,5 @@ void ArvoreBinaria::caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoRes
     } else {
         caminhaEAvalia(expressao, p->esq, algumNoResultado1, aux, valoracao);
         caminhaEAvalia(expressao, p->dir, algumNoResultado1, aux, valoracao);
-    }
-}
-
-void ArvoreBinaria::caminha(int tipo) {
-    switch (tipo) {
-        case 1: 
-            preOrdem(raiz);
-            break;
-        case 2: 
-            inOrdem(raiz);
-            break;
-        case 3: 
-            posOrdem(raiz);
-            break;
-        default:
-            std::cerr << "Tipo de caminhamento invalido" << std::endl;
     }
 }

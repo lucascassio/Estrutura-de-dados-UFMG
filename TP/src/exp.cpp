@@ -76,12 +76,16 @@ int realizaOperacaoBinaria(int x, int y, char operador) {
             return x + y;
         }
     } 
-    if (operador == '~') return !x;
+    if (operador == '~') if(x == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
     return 0;
 }
 
 // Função para realizar operações dentro de um parêntese
-void realizarOperacoes(PilhaEncadeada& binarios, PilhaEncadeada& operacoes) {
+void processarOperacoes(PilhaEncadeada& binarios, PilhaEncadeada& operacoes) {
     char operador = operacoes.desempilha();
     if (operador == '~') {
         int val1 = binarios.desempilha();
@@ -114,7 +118,7 @@ int avaliaExpressao(string expressao) {
         // Realiza as operações dentro de um parêntese
         else if (c == ')') {
             while (operacoes.topo() != '(') {
-                realizarOperacoes(binarios, operacoes);
+                processarOperacoes(binarios, operacoes);
             }
             operacoes.desempilha();
         } 
@@ -126,7 +130,7 @@ int avaliaExpressao(string expressao) {
         // Realiza as operações com base na precedência dos operadores
         else if (caractereEhOperador(c)) {
             while (!operacoes.estaVazia() && obtemPrecedenciaOperador(operacoes.topo()) >= obtemPrecedenciaOperador(c)) {
-                realizarOperacoes(binarios, operacoes);
+                processarOperacoes(binarios, operacoes);
             }
             operacoes.empilha(c);
         }
@@ -135,7 +139,7 @@ int avaliaExpressao(string expressao) {
 
     // Realiza as operações pendentes após percorrer toda a expressão, se caso existirem.
     while (!operacoes.estaVazia()) {
-        realizarOperacoes(binarios, operacoes);
+        processarOperacoes(binarios, operacoes);
     }
 
     int resultado = binarios.desempilha();

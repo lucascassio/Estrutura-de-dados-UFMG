@@ -2,15 +2,16 @@
 #define EXP_H
 
 #include <string>
+using namespace std;
 
 bool caractereEhDigito(char c);
-std::string inteiroParaString(int num);
-std::string substituiValoresVariaveis(std::string expressao, std::string valoracao);
+string inteiroParaString(int num);
+string substituiValoresVariaveis(string expressao, string valoracao);
 bool caractereEhOperador(char c);
 int caractereParaInteiro(char c);
 int obtemPrecedenciaOperador(char operador);
 int realizaOperacao(int x, int y, char operador);
-int avaliaExpressao(std::string expressao);
-void verificaSatisfatibilidade(std::string expressao, std::string valoracao);
+int avaliaExpressao(string expressao);
+void verificaSatisfatibilidade(string expressao, string valoracao);
 
 #endif 

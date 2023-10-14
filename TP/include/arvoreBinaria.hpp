@@ -23,10 +23,6 @@ public:
 private:
     void constroiRecursivo(TipoNo* &p, string item, int pos); 
     void apagaRecursivo(TipoNo* p);
-    void porNivel();
-    void preOrdem(TipoNo* p);
-    void inOrdem(TipoNo* p);
-    void posOrdem(TipoNo* p);
     TipoNo *raiz;
 };
 
