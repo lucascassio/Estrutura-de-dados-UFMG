@@ -18,8 +18,9 @@ public:
     void constroiArvore(string item);
     void caminha(int tipo);
     void limpa();
-    void caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao);
+    void caminhaEAvalia(string expressao, TipoNo *p, int& aux, int& aux2, string& valoracao);
     TipoNo* getRaiz();
+    int contarNosPenultimoNivel(TipoNo* p);
 private:
     void constroiRecursivo(TipoNo* &p, string item, int pos); 
     void apagaRecursivo(TipoNo* p);

@@ -59,22 +59,101 @@ TipoNo* ArvoreBinaria::getRaiz() {
     return raiz;
 }
 
+int ArvoreBinaria::contarNosPenultimoNivel(TipoNo* p) {
+    if (p == nullptr || (p->esq == nullptr && p->dir == nullptr)) {
+        return 0;
+    }
 
-void ArvoreBinaria::caminhaEAvalia(string expressao, TipoNo *p, bool& algumNoResultado1, int& aux, string& valoracao) {
-    if (p == nullptr) {
-        cout << "A raiz é NULA!! Impossivel prosseguir." << endl;
+    int cont = 0;
+
+    // Se o nó tem filhos no penúltimo nível, incrementa o contador
+    if (p->esq != nullptr && (p->esq->esq == nullptr && p->esq->dir == nullptr)) {
+        cont++;
+    }
+
+    if (p->dir != nullptr && (p->dir->esq == nullptr && p->dir->dir == nullptr)) {
+        cont++;
+    }
+
+    // Recursivamente conta nos filhos
+    cont += contarNosPenultimoNivel(p->esq);
+    cont += contarNosPenultimoNivel(p->dir);
+
+    return cont;
+}
+
+
+void ArvoreBinaria::caminhaEAvalia(string expressao, TipoNo *p, int& aux, int& aux2, string& valoracao) {
+    if(p == nullptr) {
+        cout << "Raiz nula!! Impossível prosseguir" << endl;
         return;
     }
-    if (p->esq == nullptr && p->dir == nullptr) {
-        string expressaoLogicaBinaria = substituiValoresVariaveis(expressao, p->item);
-        int result = avaliaExpressao(expressaoLogicaBinaria);
-        if (result == 1) {
-            valoracao = p->item;
-            algumNoResultado1 = true;
-            aux++;
-        }
-    } else {
-        caminhaEAvalia(expressao, p->esq, algumNoResultado1, aux, valoracao);
-        caminhaEAvalia(expressao, p->dir, algumNoResultado1, aux, valoracao);
+    if((p->dir->dir == nullptr && p->dir->esq == nullptr) || (p->esq->dir == nullptr && p->esq->esq == nullptr)) {
+        for (char c : p->item) {
+            if (c == 'e') {
+
+                string expressaoLogicaEsq = substituiValoresVariaveis(expressao, p->esq->item);
+                string expressaoLogicaDir = substituiValoresVariaveis(expressao, p->dir->item);    
+
+                int resultEsq = avaliaExpressao(expressaoLogicaEsq);
+                int resultDir = avaliaExpressao(expressaoLogicaDir);
+
+                if (resultEsq == 1 && resultDir == 1) {
+                    valoracao = p->item;
+                    aux = 2;
+                    aux2++;
+                }
+
+                if (resultEsq == 1 && resultDir == 0) {
+                    valoracao = p->esq->item;
+                    aux = 1;
+                    return;
+                }
+
+                if (resultEsq == 0 && resultDir == 1) {
+                    valoracao = p->dir->item;
+                    aux = 1;
+                    return;
+                }
+                
+                if (resultEsq == 0 && resultDir == 0) {
+                    valoracao = p->dir->item;
+                    aux = 0;
+                    return;
+                }
+                
+
+            } else if(c == 'a') {
+
+                string expressaoLogicaEsq = substituiValoresVariaveis(expressao, p->esq->item);
+                string expressaoLogicaDir = substituiValoresVariaveis(expressao, p->dir->item);      
+
+                int resultEsq = avaliaExpressao(expressaoLogicaEsq);
+                int resultDir = avaliaExpressao(expressaoLogicaDir);
+
+                if (resultEsq == 1 && resultDir == 1) {
+                    valoracao = p->item;
+                    aux = 2;
+                    aux2++;
+                }
+
+                if (resultEsq == 1 && resultDir == 0) {
+                    aux = 0;
+                    return;
+                }
+
+                if (resultEsq == 0 && resultDir == 1) {
+                    aux = 0;
+                    return;
+                }
+                if (resultEsq == 0 && resultDir == 0) {
+                    aux = 0;
+                    return;
+                }
+        } 
     }
+    } else {
+        caminhaEAvalia(expressao, p->esq, aux, aux2, valoracao);
+        caminhaEAvalia(expressao, p->dir, aux, aux2, valoracao);
+    } 
 }

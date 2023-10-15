@@ -24,7 +24,7 @@ string inteiroParaString(int num) {
 }
 
 // Função para substituir valores das variáveis na expressão com base em uma valoração
-std::string substituiValoresVariaveis(string expressao, string valoracao) {
+string substituiValoresVariaveis(string expressao, string valoracao) {
     string expressaoValorada = "";
     int val = 0;
     int i = 0;
@@ -76,10 +76,8 @@ int realizaOperacaoBinaria(int x, int y, char operador) {
             return x + y;
         }
     } 
-    if (operador == '~') if(x == 0) {
-        return 1;
-    } else {
-        return 0;
+    if (operador == '~') {
+        return !x;
     }
     return 0;
 }
@@ -151,45 +149,81 @@ int avaliaExpressao(string expressao) {
 
 
 // Função para verificar a satisfatibilidade da expressão dada uma valoração
+// Função para verificar a satisfatibilidade da expressão dada uma valoração
 void verificaSatisfatibilidade(string expressao, string valoracao) {
     ArvoreBinaria arvoreDeValoracao;
     arvoreDeValoracao.constroiArvore(valoracao); // Constrói a árvore de valorações
     TipoNo* raiz = arvoreDeValoracao.getRaiz();
 
     if (raiz != nullptr) {
-        bool algumNoResultado1 = false;
-        int aux = 0;
-        string val;
-        // Caminha e avalia as folhas (valorações) na árvore
-        arvoreDeValoracao.caminhaEAvalia(expressao, raiz, algumNoResultado1, aux, val);
-
-        if(aux == 1) {
-            cout << 1 << " " << val << endl;
-        }
-
-        if (!algumNoResultado1) {
-            cout << 0 << endl;
-        }
-        else if(aux > 1) {
-            string resultado = raiz -> item;
-            int pos = 0;
-
-            while(resultado[pos] != '\0') {
-                if(resultado[pos] == 'e') {
-                    resultado[pos] = 'a';
-                } 
-            pos++;
+        // Check if the root contains only digits
+        bool isRootDigits = true;
+        for (char c : raiz->item) {
+            if (!caractereEhDigito(c)) {
+                isRootDigits = false;
+                break;
             }
+        }
 
-            if(raiz->item == "ea") {
-                cout << 1 << " " << "1a" << endl;
+        if (isRootDigits) {
+            int resultado = avaliaExpressao(valoracao);
+            if (resultado == 1)
+                cout << 1 << " " << valoracao << endl;
+            else
+                cout << 0 << endl;
+            return;
+        }
+
+        int aux = 0;
+        int aux2 = 0;
+        string val;
+
+        bool raizSemE = true;
+
+        for (char c : raiz->item) {
+            if (c == 'e') {
+                raizSemE = false;
+                break;
+            }
+        }
+
+        arvoreDeValoracao.caminhaEAvalia(expressao, raiz, aux, aux2, val);
+
+        if (raizSemE) {
+            int numNosPenultimoNivel = arvoreDeValoracao.contarNosPenultimoNivel(raiz);
+            if (numNosPenultimoNivel > 2 && aux2 != numNosPenultimoNivel) {
+                cout << 0 << endl;
                 return;
             }
-            else if(raiz->item == "ae") {
-                cout << 1 << " " << "a1" << endl;
-            }
+        }
 
-            cout << 1 << " " << resultado << endl;
+        if (aux == 1) {
+            cout << 1 << " " << val << endl;
+            return;
+        } else if (aux > 1) {  
+            if (aux2 > 1) {
+                for (char &c : raiz->item) {
+                    if (c == 'e') {
+                        c = 'a';
+                    } else if (c == 'a') {
+                        c = 'a';
+                    }
+                }
+                cout << 1 << " " << raiz->item << endl;
+                return;
+            }
+            for (char &c : val) {
+                if (c == 'e') {
+                    c = 'a';
+                } else if (c == 'a') {
+                    c = 'a';
+                }
+            }
+            cout << 1 << " " << val << endl;
+            return;
+        } else {
+            cout << 0 << endl;
+            return;
         }
     } else {
         cout << "Raiz da árvore é nula. Não é possível prosseguir." << endl;
