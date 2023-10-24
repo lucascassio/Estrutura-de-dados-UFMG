@@ -54,6 +54,34 @@ int Grafo::GrauMaximo() {
     return grauMaximo;
 }
 
-void Grafo::ImprimeVizinhos(int v) {
-    vertices.ImprimirVizinhos(v);
+void Grafo::RetornaVizinhos(int v) {
+    vertices.RetornaVizinhos(v);
 }
+
+bool Grafo::ehGuloso(int v, int c, int n) {
+    int ehguloso = true;
+    NoLista* atual = vertices.getInicio();
+        int aux = v;
+        while(aux != atual -> vertice) {
+            atual = atual -> prox;
+    }
+    int cont = c;
+    for(int i = 0; i < atual->numConexoes; i++) {
+        if(c < atual->cor) {
+            cont--;
+        }
+    }
+
+    if(cont > 1) {
+        ehguloso = false;
+    }
+        
+
+    return ehguloso;
+}
+
+void Grafo::adicionarCor(int v, int c) {
+    vertices.adicionarCor(v, c);
+}
+
+

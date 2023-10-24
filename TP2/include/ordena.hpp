@@ -1,21 +1,25 @@
 #ifndef ORDENA_HPP
 #define ORDENA_HPP
 
+struct Vertice {
+    int v;
+    int c;
+};
+
 class Ordena{
     public:
 
     Ordena(int maxtam);
     ~Ordena();
-    void quicksort(int* &array);
-    void mergesort(int* &array);
-    void bubblesort(int* &array);
-    void selectionsort(int* &array);
-    void insertionsort(int* &array);
-    void heapsort(int* &array);
+    void quicksort(Vertice* array);
+    void mergesort(Vertice* array);
+    void bubblesort(Vertice* array);
+    void selectionsort(Vertice* array);
+    void insertionsort(Vertice* array);
+    void heapsort(Vertice* array);
 
     private:
     int tamanho;
-    int* array;
     void mergesortRecursao(int* array, int l, int r);
     void mergeArray(int* array, int l, int m, int r);
 };

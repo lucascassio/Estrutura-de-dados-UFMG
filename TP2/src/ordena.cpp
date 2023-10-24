@@ -5,29 +5,27 @@ using namespace std;
 
 Ordena::Ordena(int maxtam) {
     tamanho = maxtam;
-    array = new int[maxtam];
 }
 
 Ordena::~Ordena() {
-    delete[] array;
 }
 
-void Ordena::bubblesort(int* &array) {
+void Ordena::bubblesort(Vertice* array) {
     for(int i = 0; i < tamanho - 1; i++) {
         for(int j = 0; tamanho - i - 1; j++) {
-            if(array[j] > array[j + 1]) {
+            if(array[j].c > array[j + 1].c) {
                 swap(array[j], array[j+1]);
             }
         }
     }
 }
 
-void Ordena::selectionsort(int* &array) {
+void Ordena::selectionsort(Vertice* array) {
     int min;
     for(int i = 0; i < tamanho - 1; i++) {
         min = i;
         for(int j = i + 1; j < tamanho; j++) {  
-            if(array[j] < array[min]) {
+            if(array[j].c < array[min].c) {
                 min = j;
             }
         swap(array[i], array[min]);
@@ -35,32 +33,16 @@ void Ordena::selectionsort(int* &array) {
     }
 }
 
-void Ordena::insertionsort(int* &array) {
+void Ordena::insertionsort(Vertice* array) {
     for(int i = 1; i < tamanho; i++) {
-        int aux = array[i];
+        int aux = array[i].c;
         int j = i - 1;
-        while(j >= 0 && array[j] > aux) {
-            array[j + 1] = array[j];
+        while(j >= 0 && array[j].c > aux) {
+            array[j + 1].c = array[j].c;
             j = j - 1;
         }
-        array[j + 1] = aux;
+        array[j + 1].c = aux;
     }
-}
-
-void Ordena::mergesort(int* &array) {
-    mergesortRecursao(array, 0, tamanho -1);
-}
-
-void Ordena::mergesortRecursao(int* array, int l, int r) {
-    int m = l + (r - 1) / 2;
-}
-
-void Ordena::quicksort(int* &array) {
-    
-}
-
-void Ordena::heapsort(int* &array) {
-
 }
 
 

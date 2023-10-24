@@ -4,6 +4,7 @@
 struct NoLista {
     int vertice;
     int* conexoes;
+    int cor;
     int numConexoes; 
     NoLista* prox;
 };
@@ -16,9 +17,10 @@ public:
 
     void AdicionarVertice();
     void AdicionarAresta(int v, int w);
-    void ImprimirVizinhos(int v) ;
+    int* RetornaVizinhos(int v);
     int getVertices();
     NoLista* getInicio();
+    void adicionarCor(int v, int c);
 
 private:
     NoLista* inicio;

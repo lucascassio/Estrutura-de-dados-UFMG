@@ -36,6 +36,16 @@ void ListaAdjacencia::AdicionarVertice() {
     numVertices++;
 }
 
+void ListaAdjacencia::adicionarCor(int v, int c) {
+    NoLista* atual = inicio;
+
+    while(v != atual->vertice) {
+        atual = atual -> prox;
+    }
+
+    atual->cor = c;
+}
+
 
 void ListaAdjacencia::AdicionarAresta(int v, int w) {
     if (v < numVertices && w < numVertices) {
@@ -53,6 +63,7 @@ void ListaAdjacencia::AdicionarAresta(int v, int w) {
             delete[] atualV->conexoes;
             atualV->conexoes = novoArrayConexoes;
             atualV->numConexoes++;
+            delete[] novoArrayConexoes;
         } else {
             cerr << "Vértice " << v << " não encontrado!" << endl;
         }
@@ -62,7 +73,7 @@ void ListaAdjacencia::AdicionarAresta(int v, int w) {
 }
 
 
-void ListaAdjacencia::ImprimirVizinhos(int v) {
+int* ListaAdjacencia::RetornaVizinhos(int v) {
     if(v < numVertices) {
         NoLista* atual = inicio;
         while(atual->vertice != v) {
@@ -70,9 +81,7 @@ void ListaAdjacencia::ImprimirVizinhos(int v) {
         }
 
         if(atual != nullptr) {
-            for(int i = 0; i < atual->numConexoes; i++) {
-                cout << atual->conexoes[i]<< " ";
-            }
+            return atual->conexoes;
         }
 
     } else {

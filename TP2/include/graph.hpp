@@ -2,6 +2,7 @@
 #define GRAPH_HPP
 
 #include "lista.hpp"
+#include "ordena.hpp"
 
 class Grafo{
     public:
@@ -17,10 +18,15 @@ class Grafo{
         int GrauMinimo();
         int GrauMaximo();
 
-        void ImprimeVizinhos(int v);
+        void RetornaVizinhos(int v);
+
+        bool ehGuloso(int v, int c, int n);
+
+        void adicionarCor(int i, int c);
         
     private:
         ListaAdjacencia vertices;
+        Vertice v;
 };
 
 #endif
