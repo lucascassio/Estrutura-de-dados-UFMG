@@ -17,3 +17,7 @@ Este programa implementa a inserção e remoção de elementos em um Min Heap. O
 O programa lê da entrada padrão:
 - Um inteiro `n` indicando o tamanho do Min Heap.
 - Em seguida, lê `n` inteiros indicando os elementos a serem inseridos no Min Heap.
+
+## Saída 
+
+Retorna os elementos removidos do minheap de maneira ordenada do menor para o maior
