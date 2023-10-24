@@ -49,4 +49,7 @@ Exemplo:
 
 3 0 1 3
 
+## Saída
+
+Retorna os dados básicos, as vizinhanças ou se o grafo é completo ou não
 
