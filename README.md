@@ -8,23 +8,10 @@ O repositório está organizado da seguinte forma:
 
 Estrutura-de-dados-UFMG/: Este é o diretório principal onde todos os exercícios estão organizados. Cada exercício possui sua própria pasta numerada, contendo os arquivos relacionados a ele.
 
-ufmg_pds2_exercicios/atv[Número do Exercício]: Cada pasta numerada contém os arquivos específicos do exercício correspondente, incluindo códigos-fonte, recursos adicionais, bibliotecas e documentação relevante.
+Estrutura-de-dados-UFMG/atv[Número do Exercício]: Cada pasta numerada contém os arquivos específicos do exercício correspondente, incluindo códigos-fonte, recursos adicionais, bibliotecas e documentação relevante.
 
-Cada pasta de exercício contém um arquivo README.md que fornece informações detalhadas sobre o exercício, incluindo a descrição do problema, instruções de execução e dicas, se aplicável.
+Cada pasta de exercício contém um arquivo README.md que fornece informações detalhadas sobre o exercício, incluindo a descrição do problema e instruções para execução. 
 
-# Execução dos Exercícios
+Estrutura-de-dados-UFMG/TP[Número do TP]: Cada pasta com esse formato possui um trabalho prático. Diferentemente das atv`s, os trabalhos práticos focam em problemas específicos e mais complexos, que demandam um desafio maior.
 
-Cada exercício é acompanhado por um arquivo README.md explicativo e um Makefile para facilitar a compilação e execução do código.
-
-Navegue até a pasta do exercício desejado:
-  
-    cd nome-do-repositorio/atv[X]
-
-Substitua X pelo número correspondente do exercício.
-
-Leia as instruções detalhadas no arquivo README.md da pasta do exercício para entender os requisitos e a solução esperada.
-Para compilar e executar o exercício, basta usar o comando make seguido da ação desejada (por exemplo, make run):
-
-    make run
-    
-Certifique-se de ter um ambiente de desenvolvimento apropriado configurado em sua máquina.
+Cada pasta de TP contém um arquivo README.md que fornece informações detalhadas sobre o exercício, incluindo a descrição do problema e instruções para execução. 
