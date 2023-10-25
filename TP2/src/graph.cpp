@@ -58,16 +58,25 @@ void Grafo::RetornaVizinhos(int v) {
     vertices.RetornaVizinhos(v);
 }
 
-bool Grafo::ehGuloso(int v, int c, int n) {
+bool Grafo::ehGuloso(int v, int c) {
     int ehguloso = true;
     NoLista* atual = vertices.getInicio();
-        int aux = v;
-        while(aux != atual -> vertice) {
-            atual = atual -> prox;
+
+    while(v != atual -> vertice) {
+        atual = atual -> prox;
     }
+    
     int cont = c;
+
     for(int i = 0; i < atual->numConexoes; i++) {
-        if(c < atual->cor) {
+        int Vvizinho = atual->conexoes[i];
+
+        NoLista* vizinho = vertices.getInicio();
+        while(Vvizinho != vizinho -> vertice) {
+            vizinho = vizinho -> prox;
+        }
+
+        if(c < vizinho->cor) {
             cont--;
         }
     }

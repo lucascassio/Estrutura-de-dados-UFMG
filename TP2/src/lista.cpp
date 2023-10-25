@@ -15,7 +15,6 @@ ListaAdjacencia::~ListaAdjacencia() {
     }
 }
 
-
 void ListaAdjacencia::AdicionarVertice() {
     NoLista* novoNoLista = new NoLista();
     novoNoLista->vertice = numVertices;
@@ -26,7 +25,8 @@ void ListaAdjacencia::AdicionarVertice() {
     if (inicio == nullptr) {
         inicio = novoNoLista;
     } else {
-        NoLista* atual = inicio;
+        NoLista* atual = new NoLista();
+        atual = inicio;
         while (atual->prox != nullptr) {
             atual = atual->prox;
         }
@@ -63,7 +63,6 @@ void ListaAdjacencia::AdicionarAresta(int v, int w) {
             delete[] atualV->conexoes;
             atualV->conexoes = novoArrayConexoes;
             atualV->numConexoes++;
-            delete[] novoArrayConexoes;
         } else {
             cerr << "Vértice " << v << " não encontrado!" << endl;
         }
@@ -74,20 +73,19 @@ void ListaAdjacencia::AdicionarAresta(int v, int w) {
 
 
 int* ListaAdjacencia::RetornaVizinhos(int v) {
-    if(v < numVertices) {
+    if (v < numVertices) {
         NoLista* atual = inicio;
-        while(atual->vertice != v) {
+        while (atual != nullptr) {
+            if (atual->vertice == v) {
+                return atual->conexoes;
+            }
             atual = atual->prox;
         }
-
-        if(atual != nullptr) {
-            return atual->conexoes;
-        }
-
-    } else {
-        cerr << "Vértices inválidos!" << endl;
     }
+    cerr << "Vértices inválidos!" << endl;
+    return nullptr; 
 }
+
 
 int ListaAdjacencia::getVertices() {
     return numVertices;

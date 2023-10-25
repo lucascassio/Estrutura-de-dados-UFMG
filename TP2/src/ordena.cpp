@@ -11,10 +11,10 @@ Ordena::~Ordena() {
 }
 
 void Ordena::bubblesort(Vertice* array) {
-    for(int i = 0; i < tamanho - 1; i++) {
-        for(int j = 0; tamanho - i - 1; j++) {
-            if(array[j].c > array[j + 1].c) {
-                swap(array[j], array[j+1]);
+    for (int i = 0; i < tamanho - 1; i++) {
+        for (int j = 0; j < tamanho - i - 1; j++) {
+            if (array[j].c > array[j + 1].c) {
+                swap(array[j], array[j + 1]);
             }
         }
     }
@@ -22,14 +22,14 @@ void Ordena::bubblesort(Vertice* array) {
 
 void Ordena::selectionsort(Vertice* array) {
     int min;
-    for(int i = 0; i < tamanho - 1; i++) {
+    for (int i = 0; i < tamanho - 1; i++) {
         min = i;
-        for(int j = i + 1; j < tamanho; j++) {  
-            if(array[j].c < array[min].c) {
+        for (int j = i + 1; j < tamanho; j++) {
+            if (array[j].c < array[min].c) {
                 min = j;
             }
-        swap(array[i], array[min]);
         }
+        swap(array[i], array[min]); // Moved outside the inner loop
     }
 }
 

@@ -8,7 +8,7 @@ struct NoLista {
     int numConexoes; 
     NoLista* prox;
 };
-
+ 
 
 class ListaAdjacencia {
 public:

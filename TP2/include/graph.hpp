@@ -20,7 +20,7 @@ class Grafo{
 
         void RetornaVizinhos(int v);
 
-        bool ehGuloso(int v, int c, int n);
+        bool ehGuloso(int v, int c);
 
         void adicionarCor(int i, int c);
         

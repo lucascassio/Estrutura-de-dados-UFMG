@@ -38,18 +38,28 @@ int main() {
         grafo.adicionarCor(i, c);
     }
 
-    ordena.bubblesort(vertices);
+    if(o == 'b') {
+        ordena.bubblesort(vertices);
+    }
+    else if(o == 's') {
+        ordena.selectionsort(vertices);
+    }
+    else if(o == 'i') {
+        ordena.insertionsort(vertices);
+    }
+    
 
     for(int i =0; i < nVertices; i++) {
-        if(!grafo.ehGuloso(vertices[i].v, vertices[i].c, nVertices)) {
+        if(!grafo.ehGuloso(vertices[i].v, vertices[i].c)) {
             cout << 0 << endl;
-        }
-        else {
-            cout << 1 << endl;
+            return 1;
         }
     }
 
+    cout << 1 << " ";
+    for(int i = 0; i < nVertices; i++) {
+        cout << vertices[i].v << " ";
+    }
     
-  
     return 0;
 }
