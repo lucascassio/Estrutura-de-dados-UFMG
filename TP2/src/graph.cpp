@@ -84,7 +84,6 @@ bool Grafo::ehGuloso(int v, int c) {
     if(cont > 1) {
         ehguloso = false;
     }
-        
 
     return ehguloso;
 }

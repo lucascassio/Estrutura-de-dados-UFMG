@@ -29,7 +29,7 @@ void Ordena::selectionsort(Vertice* array) {
                 min = j;
             }
         }
-        swap(array[i], array[min]); // Moved outside the inner loop
+        swap(array[i], array[min]);
     }
 }
 

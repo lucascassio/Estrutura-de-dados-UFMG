@@ -63,6 +63,7 @@ void ListaAdjacencia::AdicionarAresta(int v, int w) {
             delete[] atualV->conexoes;
             atualV->conexoes = novoArrayConexoes;
             atualV->numConexoes++;
+            delete[] novoArrayConexoes;
         } else {
             cerr << "Vértice " << v << " não encontrado!" << endl;
         }
