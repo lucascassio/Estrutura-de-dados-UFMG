@@ -1,0 +1,74 @@
+# Arquivos de sistema macOS
+.DS_Store
+
+# Thumbnails de ícones
+Icon?
+
+# Pastas de metadados do macOS
+.Spotlight-V100
+.Trashes
+
+# Pastas temporárias
+__MACOSX
+
+# Arquivos de backup do TextEdit
+._*
+
+# Imagens geradas automaticamente
+.image*
+
+# Logs e relatórios
+.logs
+
+# Folders used by macOS to store app-specific files
+.AppleDouble
+.AppleDB
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Logs e relatórios
+logs
+
+# Cache de pré-visualização do QuickLook
+com.apple.QuickLook.thumbnailcache
+
+# Cache do Xcode
+*.xcuserstate
+
+# Arquivos de backup criados pelo Xcode
+*.xccheckout
+*.moved-aside
+DerivedData
+
+# Arquivos de configuração do Xcode
+xcuserdata
+
+# Caches do AppCode
+.idea
+
+# Virtual Studio Code
+.vscode
+
+# Sublime Text
+*.sublime-workspace
+
+# TextMate
+*.tmproj
+*.tmbundle
+
+# Arquivos de configuração do Android Studio
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+
+# Flutter
+.idea/caches
+.idea/libraries
+
+# Eclipse
+.metadata
+
+# Visual Studio
+.vs
