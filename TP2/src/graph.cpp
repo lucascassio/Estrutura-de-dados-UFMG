@@ -59,15 +59,12 @@ void Grafo::RetornaVizinhos(int v) {
 }
 
 bool Grafo::ehGuloso(int v, int c) {
-    int ehguloso = true;
     NoLista* atual = vertices.getInicio();
-
+    bool* tdMenores = new bool[c - 1];
     while(v != atual -> vertice) {
         atual = atual -> prox;
     }
     
-    int cont = c;
-
     for(int i = 0; i < atual->numConexoes; i++) {
         int Vvizinho = atual->conexoes[i];
 
@@ -76,16 +73,20 @@ bool Grafo::ehGuloso(int v, int c) {
             vizinho = vizinho -> prox;
         }
 
-        if(c < vizinho->cor) {
-            cont--;
+        if(c > vizinho -> cor) {
+            tdMenores[vizinho->vertice] = true;
+        }
+
+    }
+
+    for(int i = 1; i < c; i++) {
+        if(tdMenores[i] == false) {
+            return false;
         }
     }
 
-    if(cont > 1) {
-        ehguloso = false;
-    }
-
-    return ehguloso;
+    delete[] tdMenores;
+    return true;
 }
 
 void Grafo::adicionarCor(int v, int c) {
