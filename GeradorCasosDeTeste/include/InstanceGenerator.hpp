@@ -2,6 +2,7 @@
 #define INSTANCE_GENERATOR_HPP
 
 #include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 

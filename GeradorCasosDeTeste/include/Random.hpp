@@ -2,12 +2,14 @@
 #define RANDOM_HPP
 
 #include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 class Random{
     public:
-        static constexpr double Espilon = 10e-8;
+        static double Epsilon;
+
 
         static void SetSeed();
         static double Double();

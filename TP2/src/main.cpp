@@ -47,13 +47,12 @@ int main() {
         ordena.selectionsort(vertices);
     } else if (o == 'i') {
         ordena.insertionsort(vertices);
+    } else if(o == 'm') {
+        ordena.mergesort(vertices, 0, nVertices - 1);
     }
 
     for (int i = 0; i < nVertices; i++) {
         if (!grafo.ehGuloso(vertices[i].v, vertices[i].c)) {
-            auto stop = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-            cout << "Tempo de execução: " << duration.count() << " microssegundos" << endl;
             cout << 0 << endl;
             delete[] vertices; 
             return 1;
@@ -64,9 +63,6 @@ int main() {
     for (int i = 0; i < nVertices; i++) {
         cout << vertices[i].v << " ";
     }
-
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
     delete[] vertices;
     return 0;

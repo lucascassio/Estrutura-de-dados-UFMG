@@ -12,7 +12,7 @@ class Ordena{
     Ordena(int maxtam);
     ~Ordena();
     void quicksort(Vertice* array);
-    void mergesort(Vertice* array);
+    void mergesort(Vertice* array, int inicio, int fim);
     void bubblesort(Vertice* array);
     void selectionsort(Vertice* array);
     void insertionsort(Vertice* array);
@@ -20,8 +20,9 @@ class Ordena{
 
     private:
     int tamanho;
-    void mergesortRecursao(int* array, int l, int r);
-    void mergeArray(int* array, int l, int m, int r);
+    void quicksort_recursao(Vertice* array, int baixo, int cima);
+    int particao(Vertice* array, int baixo, int cima);
+    void merge(Vertice* array, int inicio, int metade, int fim);
 };
 
 #endif

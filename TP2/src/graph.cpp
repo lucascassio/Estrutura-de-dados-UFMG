@@ -48,7 +48,7 @@ bool Grafo::ehGuloso(int v, int c) {
         }
     }
 
-    for (int i = 1; i < c; i++) {
+    for (int i = 1; i < c - 1; i++) {
         if (!tdMenores[i]) {
             delete[] tdMenores; 
             return false;
