@@ -7,7 +7,7 @@ void Random::SetSeed(){
     srand(time(0));
 }
 
-double Random::Epsilon = 1e-8;
+const double Random::Epsilon = 1e-8;
 
 double Random::Double(){
     return rand() / (double)RAND_MAX;

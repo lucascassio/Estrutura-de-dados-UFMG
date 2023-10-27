@@ -171,7 +171,7 @@ char InstanceGenerator::GetOrderingMethod(){
     int m = Random::Int(7);
     switch(m){
         case 0: return 'b';
-        case 1: return 's';
+        case 1: return 'p';
         case 2: return 'i';
         case 3: return 'q';
         case 4: return 'm';

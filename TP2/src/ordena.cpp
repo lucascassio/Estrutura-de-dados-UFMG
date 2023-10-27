@@ -3,13 +3,16 @@
 
 using namespace std;
 
+// Construtor
 Ordena::Ordena(int maxtam) {
     tamanho = maxtam;
 }
 
+// Destrutor
 Ordena::~Ordena() {
 }
 
+// Método de ordenação bubblesort
 void Ordena::bubblesort(Vertice* array) {
     for (int i = 0; i < tamanho - 1; i++) {
         for (int j = 0; j < tamanho - i - 1; j++) {
@@ -20,6 +23,7 @@ void Ordena::bubblesort(Vertice* array) {
     }
 }
 
+// Método de ordenação selectionsort
 void Ordena::selectionsort(Vertice* array) {
     int min;
     for (int i = 0; i < tamanho - 1; i++) {
@@ -33,6 +37,7 @@ void Ordena::selectionsort(Vertice* array) {
     }
 }
 
+// Método de ordenação insertionsort
 void Ordena::insertionsort(Vertice* array) {
     for(int i = 1; i < tamanho; i++) {
         int aux = array[i].c;
@@ -45,6 +50,7 @@ void Ordena::insertionsort(Vertice* array) {
     }
 }
 
+// Método de ordenação mergesort
 void Ordena::mergesort(Vertice* array, int inicio, int fim) {
     if(inicio < fim) {
         int metade = (inicio + fim) / 2;
@@ -54,6 +60,7 @@ void Ordena::mergesort(Vertice* array, int inicio, int fim) {
     }
 }
 
+// Função auxiliar do mergesort, merge
 void Ordena::merge(Vertice* array, int inicio, int meio, int fim) {
     int tamanho_esquerda = meio - inicio + 1;
     int tamanho_direita = fim - meio;
@@ -82,6 +89,39 @@ void Ordena::merge(Vertice* array, int inicio, int meio, int fim) {
     }
 }
 
+// Método de ordenação heapsort
+void Ordena::heapsort(Vertice* array) {
+    for(int i = tamanho / 2 - 1; i >= 0; i--) {
+        heapify(array, tamanho, i);
+    }
+
+    for(int i = tamanho - 1; i > 0; i--) {
+        swap(array[0], array[i]);
+
+        heapify(array, i, 0);
+    }
+}
+
+// Função auxiliar do heapsort, heapify
+void Ordena::heapify(Vertice* array, int n, int i) {
+    int maior = i;
+    int esquerda = 2 * i + 1;
+    int direita = 2 * i + 2;
+
+    if(esquerda < n && array[esquerda].c > array[maior].c) {
+        maior = esquerda;
+    }
+
+    if(direita < n && array[direita].c > array[maior].c) {
+        maior = direita;
+    }  
+
+    if(maior != i) {
+        swap(array[i], array[maior]);
+
+        heapify(array, n, maior);
+    }
+}
 /*
 void Ordena::quicksort(Vertice* array) {
     quicksort_recursao(array, 0, tamanho - 1);

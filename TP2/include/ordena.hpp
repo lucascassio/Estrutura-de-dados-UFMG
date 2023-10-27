@@ -23,6 +23,7 @@ class Ordena{
     void quicksort_recursao(Vertice* array, int baixo, int cima);
     int particao(Vertice* array, int baixo, int cima);
     void merge(Vertice* array, int inicio, int metade, int fim);
+    void heapify(Vertice* array, int n, int i);
 };
 
 #endif

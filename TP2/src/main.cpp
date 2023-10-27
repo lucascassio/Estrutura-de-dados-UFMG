@@ -49,6 +49,8 @@ int main() {
         ordena.insertionsort(vertices);
     } else if(o == 'm') {
         ordena.mergesort(vertices, 0, nVertices - 1);
+    } else if(o == 'p') {
+        ordena.heapsort(vertices);
     }
 
     for (int i = 0; i < nVertices; i++) {
