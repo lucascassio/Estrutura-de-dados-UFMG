@@ -44,14 +44,14 @@ void Ordena::selectionsort(Vertice* array) {
 
 // Método de ordenação insertionsort
 void Ordena::insertionsort(Vertice* array) {
-    for(int i = 1; i < tamanho; i++) {
-        int aux = array[i].c;
+    for (int i = 1; i < tamanho; i++) {
+        Vertice aux = array[i];
         int j = i - 1;
-        while(j >= 0 && array[j].c > aux) {
-            array[j + 1].c = array[j].c;
+        while (j >= 0 && array[j].c > aux.c) {
+            array[j + 1] = array[j];
             j = j - 1;
         }
-        array[j + 1].c = aux;
+        array[j + 1] = aux;
     }
 }
 
