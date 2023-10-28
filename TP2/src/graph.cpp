@@ -1,5 +1,4 @@
 #include <iostream>
-#include "../include/lista.hpp"
 #include "../include/graph.hpp"
 
 Grafo::Grafo() {}
@@ -44,11 +43,11 @@ bool Grafo::ehGuloso(int v, int c) {
         }
 
         if (c > vizinho->cor) {
-            tdMenores[vizinho->vertice] = true;
+            tdMenores[vizinho->cor] = true;
         }
     }
 
-    for (int i = 1; i < c - 1; i++) {
+    for (int i = 1; i <= c - 1; i++) {
         if (!tdMenores[i]) {
             delete[] tdMenores; 
             return false;

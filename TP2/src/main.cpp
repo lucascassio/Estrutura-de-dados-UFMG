@@ -9,7 +9,6 @@
 using namespace std;
 
 int main() {
-    auto start = std::chrono::high_resolution_clock::now();
     char o;
     cin >> o;
     int nVertices;
@@ -48,9 +47,13 @@ int main() {
     } else if (o == 'i') {
         ordena.insertionsort(vertices);
     } else if(o == 'm') {
-        ordena.mergesort(vertices, 0, nVertices - 1);
+        ordena.mergesort(vertices);
     } else if(o == 'p') {
         ordena.heapsort(vertices);
+    } else if(o == 'q') {
+        ordena.quicksort(vertices);
+    } else if(o == 'y') {
+        ordena.bubblesort(vertices);
     }
 
     for (int i = 0; i < nVertices; i++) {

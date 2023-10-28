@@ -1,5 +1,4 @@
 #include "../include/ordena.hpp"
-#include <iostream>
 
 using namespace std;
 
@@ -12,12 +11,18 @@ Ordena::Ordena(int maxtam) {
 Ordena::~Ordena() {
 }
 
+void Ordena::Swap(int a, int b, Vertice* array) {
+    Vertice temp = array[b];
+    array[b] = array[a];
+    array[a] = temp;
+}
+ 
 // Método de ordenação bubblesort
 void Ordena::bubblesort(Vertice* array) {
     for (int i = 0; i < tamanho - 1; i++) {
         for (int j = 0; j < tamanho - i - 1; j++) {
             if (array[j].c > array[j + 1].c) {
-                swap(array[j], array[j + 1]);
+                Swap(j, j + 1, array);
             }
         }
     }
@@ -33,7 +38,7 @@ void Ordena::selectionsort(Vertice* array) {
                 min = j;
             }
         }
-        swap(array[i], array[min]);
+        Swap(i, min, array);
     }
 }
 
@@ -51,11 +56,15 @@ void Ordena::insertionsort(Vertice* array) {
 }
 
 // Método de ordenação mergesort
-void Ordena::mergesort(Vertice* array, int inicio, int fim) {
-    if(inicio < fim) {
+void Ordena::mergesort(Vertice* array) {
+    mergesort_recursao(array, 0, tamanho - 1);
+}
+
+void Ordena::mergesort_recursao(Vertice* array, int inicio, int fim) {
+    if (inicio < fim) {
         int metade = (inicio + fim) / 2;
-        mergesort(array, inicio, metade);
-        mergesort(array, metade + 1, fim);
+        mergesort_recursao(array, inicio, metade);
+        mergesort_recursao(array, metade + 1, fim);
         merge(array, inicio, metade, fim);
     }
 }
@@ -70,16 +79,16 @@ void Ordena::merge(Vertice* array, int inicio, int meio, int fim) {
 
     int i, j, k;
 
-    for(int i = 0; i < tamanho_esquerda; i++) {
+    for (i = 0; i < tamanho_esquerda; i++) {
         temp_esquerda[i] = array[inicio + i];
     }
 
-    for(int i = 0; i < tamanho_direita; i++) {
+    for (i = 0; i < tamanho_direita; i++) {
         temp_direita[i] = array[meio + 1 + i];
     }
 
-    for(i = 0, j = 0, k = inicio; k <= fim; k++) {
-        if((i < tamanho_esquerda) && (j >= tamanho_direita || temp_esquerda[i].c <= temp_direita[j].c)) {
+    for (i = 0, j = 0, k = inicio; k <= fim; k++) {
+        if ((i < tamanho_esquerda) && (j >= tamanho_direita || (temp_esquerda[i].c < temp_direita[j].c || (temp_esquerda[i].c == temp_direita[j].c && temp_esquerda[i].v < temp_direita[j].v)))) {
             array[k] = temp_esquerda[i];
             i++;
         } else {
@@ -87,16 +96,19 @@ void Ordena::merge(Vertice* array, int inicio, int meio, int fim) {
             j++;
         }
     }
+
+    delete[] temp_esquerda;
+    delete[] temp_direita;
 }
 
 // Método de ordenação heapsort
 void Ordena::heapsort(Vertice* array) {
-    for(int i = tamanho / 2 - 1; i >= 0; i--) {
+    for (int i = tamanho / 2 - 1; i >= 0; i--) {
         heapify(array, tamanho, i);
     }
 
-    for(int i = tamanho - 1; i > 0; i--) {
-        swap(array[0], array[i]);
+    for (int i = tamanho - 1; i > 0; i--) {
+        Swap(0, i, array);
 
         heapify(array, i, 0);
     }
@@ -108,44 +120,45 @@ void Ordena::heapify(Vertice* array, int n, int i) {
     int esquerda = 2 * i + 1;
     int direita = 2 * i + 2;
 
-    if(esquerda < n && array[esquerda].c > array[maior].c) {
+    if (esquerda < n && (array[esquerda].c > array[maior].c || (array[esquerda].c == array[maior].c && array[esquerda].v > array[maior].v))) {
         maior = esquerda;
     }
 
-    if(direita < n && array[direita].c > array[maior].c) {
+    if (direita < n && (array[direita].c > array[maior].c || (array[direita].c == array[maior].c && array[direita].v > array[maior].v))) {
         maior = direita;
-    }  
+    }
 
-    if(maior != i) {
-        swap(array[i], array[maior]);
+    if (maior != i) {
+        Swap(i, maior, array);
 
         heapify(array, n, maior);
     }
 }
-/*
+
 void Ordena::quicksort(Vertice* array) {
     quicksort_recursao(array, 0, tamanho - 1);
 }
 
 void Ordena::quicksort_recursao(Vertice* array, int baixo, int cima) {
-    if(baixo < cima) {
-    int pivot_index = particao(array, baixo, cima);
-    quicksort_recursao(array, baixo, pivot_index - 1);
-    quicksort_recursao(array, pivot_index + 1, cima);
+    if (baixo < cima) {
+        int pivot_index = particao(array, baixo, cima);
+        quicksort_recursao(array, baixo, pivot_index - 1);
+        quicksort_recursao(array, pivot_index + 1, cima);
     }
 }
 
-int particao(Vertice* array, int baixo, int cima) {
+// Função auxiliar do quicksort, particao
+int Ordena::particao(Vertice* array, int baixo, int cima) {
     int pivot_valor = array[cima].c;
-    int i = baixo;
+    int i = (baixo - 1);
 
-    for(int j = baixo; j < cima; j++) {
-        if(array[j] <= pivot_valor) {
-            swap(array[j], array[i]);
+    for (int j = baixo; j <= cima; j++) {
+        if (array[j].c < pivot_valor || (array[j].c == pivot_valor && array[j].v < array[cima].v)) {
             i++;
+            Swap(i, j, array);
         }
     }
-    
-    swap(array[j], array[cima]);
+
+    Swap(i + 1, cima, array);
+    return (i + 1);
 }
-*/

@@ -2,7 +2,6 @@
 #define GRAPH_HPP
 
 #include "lista.hpp"
-#include "ordena.hpp"
 
 class Grafo{
     public:
