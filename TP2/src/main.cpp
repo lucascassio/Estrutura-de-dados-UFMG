@@ -53,7 +53,7 @@ int main() {
     } else if(o == 'q') {
         ordena.quicksort(vertices);
     } else if(o == 'y') {
-        ordena.bubblesort(vertices);
+        ordena.mysort(vertices);
     }
 
     for (int i = 0; i < nVertices; i++) {

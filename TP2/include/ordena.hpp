@@ -6,8 +6,6 @@ struct Vertice {
     int c;
 };
 
-
-
 class Ordena{
     public:
 
@@ -19,7 +17,7 @@ class Ordena{
     void selectionsort(Vertice* array);
     void insertionsort(Vertice* array);
     void heapsort(Vertice* array);
-    void treesort(Vertice* array);
+    void mysort(Vertice* array);
 
     private:
     int tamanho;
@@ -29,6 +27,7 @@ class Ordena{
     void mergesort_recursao(Vertice* array, int meio, int inicio);
     void merge(Vertice* array, int inicio, int metade, int fim);
     void heapify(Vertice* array, int n, int i);
+    int obtemMax(Vertice* array);
 };
 
 #endif

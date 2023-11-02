@@ -1,6 +1,7 @@
 #include "../include/ordena.hpp"
-
+#include <iostream>
 using namespace std;
+
 
 // Construtor
 Ordena::Ordena(int maxtam) {
@@ -30,15 +31,21 @@ void Ordena::bubblesort(Vertice* array) {
 
 // Método de ordenação selectionsort
 void Ordena::selectionsort(Vertice* array) {
-    int min;
-    for (int i = 0; i < tamanho - 1; i++) {
-        min = i;
+    for (int i = 0; i < tamanho; i++) {
+        int min = i;
         for (int j = i + 1; j < tamanho; j++) {
-            if (array[j].c < array[min].c) {
+            if (array[min].c > array[j].c) {
                 min = j;
             }
+ 
+        Vertice chave = array[min];
+
+        for(int k = min; k > i; k--) {
+            array[k] = array[k-1];
+            array[i] = chave;
         }
-        Swap(i, min, array);
+
+        }
     }
 }
 
@@ -88,7 +95,7 @@ void Ordena::merge(Vertice* array, int inicio, int meio, int fim) {
     }
 
     for (i = 0, j = 0, k = inicio; k <= fim; k++) {
-        if ((i < tamanho_esquerda) && (j >= tamanho_direita || (temp_esquerda[i].c < temp_direita[j].c || (temp_esquerda[i].c == temp_direita[j].c && temp_esquerda[i].v < temp_direita[j].v)))) {
+        if ((i < tamanho_esquerda) && (j >= tamanho_direita || (temp_esquerda[i].c < temp_direita[j].c || (temp_esquerda[i].c == temp_direita[j].c)))) {
             array[k] = temp_esquerda[i];
             i++;
         } else {
@@ -161,4 +168,53 @@ int Ordena::particao(Vertice* array, int baixo, int cima) {
 
     Swap(i + 1, cima, array);
     return (i + 1);
+}
+
+struct cont {
+    int cont;
+    int* vertice; 
+    int cor;
+};
+
+void Ordena::mysort(Vertice* array) {
+    int MAX = obtemMax(array);
+
+    cont* aux = new cont[MAX + 1]();
+
+    for (int i = 0; i <= MAX; i++) {
+        aux[i].vertice = new int[MAX];
+    }
+
+    for (int i = 0; i < tamanho; i++) {
+        aux[array[i].c].cont++;
+        aux[array[i].c].vertice[aux[array[i].c].cont - 1] = array[i].v;
+        aux[array[i].c].cor = array[i].c;
+    }
+
+    int idx = 0;
+
+    for (int i = 0; i <= MAX; i++) {
+        int cont = aux[i].cont;
+        for (int j = 0; j < cont; j++) {
+            array[idx].v = aux[i].vertice[j];
+            array[idx].c = aux[i].cor;
+            idx++;
+        }
+    }
+
+    for (int i = 0; i <= MAX; i++) {
+        delete[] aux[i].vertice;
+    }
+    
+    delete[] aux;
+}
+
+int Ordena::obtemMax(Vertice* array) {
+    int aux = 0;
+    for(int i = 0; i < tamanho; i++) {
+        if(array[i].c > aux) {
+            aux = array[i].c;
+        }
+    }
+    return aux;
 }
