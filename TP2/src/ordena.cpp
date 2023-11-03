@@ -2,23 +2,23 @@
 #include <iostream>
 using namespace std;
 
-
-// Construtor
+// Construtor da classe Ordena que aceita o tamanho máximo (maxtam) para o array de Vertice.
 Ordena::Ordena(int maxtam) {
-    tamanho = maxtam;
+    tamanho = maxtam; // Inicializa o tamanho do array.
 }
 
-// Destrutor
+// Destrutor da classe Ordena.
 Ordena::~Ordena() {
 }
 
+// Função auxiliar para trocar dois elementos no array.
 void Ordena::Swap(int a, int b, Vertice* array) {
     Vertice temp = array[b];
     array[b] = array[a];
     array[a] = temp;
 }
  
-// Método de ordenação bubblesort
+// Método de ordenação bubblesort.
 void Ordena::bubblesort(Vertice* array) {
     for (int i = 0; i < tamanho - 1; i++) {
         for (int j = 0; j < tamanho - i - 1; j++) {
@@ -29,27 +29,26 @@ void Ordena::bubblesort(Vertice* array) {
     }
 }
 
-// Método de ordenação selectionsort
+// Método de ordenação selectionsort.
 void Ordena::selectionsort(Vertice* array) {
-    for (int i = 0; i < tamanho; i++) {
-        int min = i;
-        for (int j = i + 1; j < tamanho; j++) {
-            if (array[min].c > array[j].c) {
-                min = j;
+    int i, j, min_idx;
+    for (i = 0; i < tamanho; i++) {
+        min_idx = i;
+        for (j = i + 1; j < tamanho; j++) {
+            // Primeiro critério de ordenação: array[i].c
+            if (array[j].c < array[min_idx].c) {
+                min_idx = j;
             }
- 
-        Vertice chave = array[min];
-
-        for(int k = min; k > i; k--) {
-            array[k] = array[k-1];
-            array[i] = chave;
+            // Em caso de empate, ordenar por array[i].v
+            else if (array[j].c == array[min_idx].c && array[j].v < array[min_idx].v) {
+                min_idx = j;
+            }
         }
-
-        }
+        Swap(min_idx, i, array);  
     }
 }
 
-// Método de ordenação insertionsort
+// Método de ordenação insertionsort.
 void Ordena::insertionsort(Vertice* array) {
     for (int i = 1; i < tamanho; i++) {
         Vertice aux = array[i];
@@ -62,11 +61,12 @@ void Ordena::insertionsort(Vertice* array) {
     }
 }
 
-// Método de ordenação mergesort
+// Método de ordenação mergesort.
 void Ordena::mergesort(Vertice* array) {
     mergesort_recursao(array, 0, tamanho - 1);
 }
 
+// Função auxiliar para o mergesort.
 void Ordena::mergesort_recursao(Vertice* array, int inicio, int fim) {
     if (inicio < fim) {
         int metade = (inicio + fim) / 2;
@@ -141,11 +141,12 @@ void Ordena::heapify(Vertice* array, int n, int i) {
         heapify(array, n, maior);
     }
 }
-
+// Método de ordenação quicksort.
 void Ordena::quicksort(Vertice* array) {
     quicksort_recursao(array, 0, tamanho - 1);
 }
 
+// Função auxiliar para o quicksort, que divide e conquista.
 void Ordena::quicksort_recursao(Vertice* array, int baixo, int cima) {
     if (baixo < cima) {
         int pivot_index = particao(array, baixo, cima);
@@ -154,7 +155,7 @@ void Ordena::quicksort_recursao(Vertice* array, int baixo, int cima) {
     }
 }
 
-// Função auxiliar do quicksort, particao
+// Função auxiliar do quicksort, que realiza a partição.
 int Ordena::particao(Vertice* array, int baixo, int cima) {
     int pivot_valor = array[cima].c;
     int i = (baixo - 1);
@@ -170,12 +171,14 @@ int Ordena::particao(Vertice* array, int baixo, int cima) {
     return (i + 1);
 }
 
+// Estrutura 'cont' para auxiliar na ordenação personalizada.
 struct cont {
     int cont;
     int* vertice; 
     int cor;
 };
 
+// Método de ordenação personalizada mysort.
 void Ordena::mysort(Vertice* array) {
     int MAX = obtemMax(array);
 
@@ -185,6 +188,7 @@ void Ordena::mysort(Vertice* array) {
         aux[i].vertice = new int[MAX];
     }
 
+    // Conta quantos vértices têm cada cor e associa seus índices.
     for (int i = 0; i < tamanho; i++) {
         aux[array[i].c].cont++;
         aux[array[i].c].vertice[aux[array[i].c].cont - 1] = array[i].v;
@@ -193,6 +197,7 @@ void Ordena::mysort(Vertice* array) {
 
     int idx = 0;
 
+    // Reconstrói o array original ordenando os vértices por cor.
     for (int i = 0; i <= MAX; i++) {
         int cont = aux[i].cont;
         for (int j = 0; j < cont; j++) {
@@ -202,6 +207,7 @@ void Ordena::mysort(Vertice* array) {
         }
     }
 
+    // Libera a memória alocada.
     for (int i = 0; i <= MAX; i++) {
         delete[] aux[i].vertice;
     }
@@ -209,6 +215,7 @@ void Ordena::mysort(Vertice* array) {
     delete[] aux;
 }
 
+// Função auxiliar para obter o valor máximo de 'c' no array de Vertice.
 int Ordena::obtemMax(Vertice* array) {
     int aux = 0;
     for(int i = 0; i < tamanho; i++) {

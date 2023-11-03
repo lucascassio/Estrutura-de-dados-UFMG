@@ -1,96 +1,84 @@
 #include "../include/lista.hpp"
-
 #include <iostream>
 
-using namespace std;
+// Construtor da classe ListaAdjacencia que aceita o tamanho máximo MAXTAM.
+ListaAdjacencia::ListaAdjacencia(int MAXTAM) {
+    numVertices = MAXTAM; // Define o número máximo de vértices.
+    vertices = new Vertices[MAXTAM]; // Aloca espaço para o array de vértices.
+    qtdInseridos = 0; // Inicializa o contador de vértices inseridos.
+}
 
-ListaAdjacencia::ListaAdjacencia() : inicio(nullptr), numVertices(0) {}
-
+// Destrutor da classe ListaAdjacencia.
 ListaAdjacencia::~ListaAdjacencia() {
-    NoLista* atual = inicio;
-    while (atual != nullptr) {
-        NoLista* proximo = atual->prox;
-        delete atual;
-        atual = proximo;
-    }
-}
+    for (int i = 0; i < numVertices; i++) {
+        Conexao* conexaoAtual = vertices[i].conexoes;
 
-void ListaAdjacencia::AdicionarVertice() {
-    NoLista* novoNoLista = new NoLista();
-    novoNoLista->vertice = numVertices;
-    novoNoLista->conexoes = nullptr;  
-    novoNoLista->numConexoes = 0;   
-    novoNoLista->prox = nullptr;
-
-    if (inicio == nullptr) {
-        inicio = novoNoLista;
-    } else {
-        NoLista* atual = new NoLista();
-        atual = inicio;
-        while (atual->prox != nullptr) {
-            atual = atual->prox;
+        // Libera a memória das conexões de cada vértice.
+        while (conexaoAtual != nullptr) {
+            Conexao* proximaConexao = conexaoAtual->proxima;
+            delete conexaoAtual;
+            conexaoAtual = proximaConexao;
         }
-        atual->prox = novoNoLista;
     }
 
-    numVertices++;
+    delete[] vertices; // Libera a memória do array de vértices.
 }
 
-void ListaAdjacencia::adicionarCor(int v, int c) {
-    NoLista* atual = inicio;
-
-    while(v != atual->vertice) {
-        atual = atual -> prox;
-    }
-
-    atual->cor = c;
+// Função para adicionar um vértice à lista de adjacência.
+void ListaAdjacencia::AdicionarVertice() {
+    vertices[qtdInseridos].vertice = qtdInseridos;
+    vertices[qtdInseridos].cor = -1; // Inicializa a cor como -1 (não atribuída).
+    vertices[qtdInseridos].conexoes = nullptr; // Inicializa as conexões como nulas.
+    qtdInseridos++; // Incrementa o contador de vértices inseridos.
 }
 
-
+// Função para adicionar uma aresta entre os vértices 'v' e 'w'.
 void ListaAdjacencia::AdicionarAresta(int v, int w) {
     if (v < numVertices && w < numVertices) {
-        NoLista* atualV = inicio;
-        while (atualV->vertice != v) {
-            atualV = atualV->prox;
-        }
+        Conexao* conexaoAtual = vertices[v].conexoes;
 
-        if (atualV != nullptr) {
-            int* novoArrayConexoes = new int[atualV->numConexoes + 1];
-            for (int i = 0; i < atualV->numConexoes; i++) {
-                novoArrayConexoes[i] = atualV->conexoes[i];
-            }
-            novoArrayConexoes[atualV->numConexoes] = w;
-            delete[] atualV->conexoes;
-            atualV->conexoes = novoArrayConexoes;
-            atualV->numConexoes++;
+        if (conexaoAtual == nullptr) {
+            // Se não houver conexões, cria uma nova conexão.
+            Conexao* novaConexaoV = new Conexao();
+            novaConexaoV->vizinho = w;
+            novaConexaoV->proxima = nullptr;
+            vertices[v].conexoes = novaConexaoV;
         } else {
-            cerr << "Vértice " << v << " não encontrado!" << endl;
+            // Caso contrário, percorre as conexões existentes.
+            while (conexaoAtual->proxima != nullptr) {
+                // Verifica se a aresta já existe.
+                if (conexaoAtual->vizinho == w) {
+                    return; // Se existir, não faz nada.
+                }
+                conexaoAtual = conexaoAtual->proxima;
+            }
+
+            // Adiciona a nova conexão.
+            Conexao* novaConexaoV = new Conexao();
+            novaConexaoV->vizinho = w;
+            novaConexaoV->proxima = nullptr;
+            conexaoAtual->proxima = novaConexaoV;
         }
     } else {
-        cerr << "Vértices inválidos!" << endl;
+        std::cerr << "Vértices inválidos!" << std::endl; // Exibe uma mensagem de erro se os vértices forem inválidos.
     }
 }
 
-
-int* ListaAdjacencia::RetornaVizinhos(int v) {
-    if (v < numVertices) {
-        NoLista* atual = inicio;
-        while (atual != nullptr) {
-            if (atual->vertice == v) {
-                return atual->conexoes;
-            }
-            atual = atual->prox;
-        }
-    }
-    cerr << "Vértices inválidos!" << endl;
-    return nullptr; 
-}
-
-
-int ListaAdjacencia::getVertices() {
+// Função para obter o número de vértices na lista de adjacência.
+int ListaAdjacencia::getNumVertices() {
     return numVertices;
 }
 
-NoLista* ListaAdjacencia::getInicio() {
-    return inicio;
+// Função para obter a matriz de vértices.
+Vertices* ListaAdjacencia::getVertices() {
+    return vertices;
+}
+
+// Função para adicionar uma cor 'c' ao vértice 'v'.
+void ListaAdjacencia::adicionarCor(int v, int c) {
+    if (v < numVertices) {
+        vertices[v].cor = c;
+    } else {
+        std::cerr << "Vértice inválido!" << std::endl; // Exibe uma mensagem de erro se o vértice for inválido.
+    }
 }
