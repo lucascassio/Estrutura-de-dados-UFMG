@@ -1,11 +1,15 @@
 #include "../include/ordena.hpp"
 #include "../include/graph.hpp"
 #include "../include/lista.hpp"
+#include "../include/memlog.hpp"
+#include "../include/msgassert.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main() {
+    char lognome[100] = "/tmp/greedy.out";
+    int regmem = 1;
     char o;
     cin >> o; // Lê um caractere que representa o tipo de ordenação a ser usado.
     int nVertices;
@@ -40,20 +44,34 @@ int main() {
         grafo.adicionaCor(i, c); // Atribui a cor ao vértice no grafo.
     }
 
+    iniciaMemLog(lognome);
+
+    if(regmem) ativaMemLog();
+    else desativaMemLog();
+
+    defineFaseMemLog(0);
+
     // Escolhe e aplica o algoritmo de ordenação com base no caractere 'o'.
     if (o == 'b') {
+        defineFaseMemLog(1);
         ordena.bubblesort(vertices);
     } else if (o == 's') {
+        defineFaseMemLog(1);
         ordena.selectionsort(vertices);
     } else if (o == 'i') {
+        defineFaseMemLog(1);
         ordena.insertionsort(vertices);
     } else if (o == 'm') {
+        defineFaseMemLog(1);
         ordena.mergesort(vertices);
     } else if (o == 'p') {
+        defineFaseMemLog(1);
         ordena.heapsort(vertices);
     } else if (o == 'q') {
+        defineFaseMemLog(1);
         ordena.quicksort(vertices);
     } else if (o == 'y') {
+        defineFaseMemLog(1);
         ordena.mysort(vertices);
     }
 

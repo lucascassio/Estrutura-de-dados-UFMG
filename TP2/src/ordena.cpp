@@ -1,4 +1,6 @@
 #include "../include/ordena.hpp"
+#include "../include/memlog.hpp"
+#include "../include/msgassert.hpp"
 #include <iostream>
 using namespace std;
 
@@ -159,11 +161,16 @@ void Ordena::quicksort_recursao(Vertice* array, int baixo, int cima) {
 int Ordena::particao(Vertice* array, int baixo, int cima) {
     int pivot_valor = array[cima].c;
     int i = (baixo - 1);
+    
 
     for (int j = baixo; j <= cima; j++) {
+        LEMEMLOG((long int)(&(array[j])), sizeof(double), array[j].c);
+        LEMEMLOG((long int)(&(array[j+ 1])), sizeof(double), array[j + 1].c);
         if (array[j].c < pivot_valor || (array[j].c == pivot_valor && array[j].v < array[cima].v)) {
             i++;
             Swap(i, j, array);
+            ESCREVEMEMLOG((long int)(&(array[i])), sizeof(double), array[j].c);
+            ESCREVEMEMLOG((long int)(&(array[i])), sizeof(double), array[j].c);
         }
     }
 
