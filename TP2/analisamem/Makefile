@@ -30,9 +30,8 @@ use: $(EXE)
 	if test -d /tmp/out; then rm -rf /tmp/out; fi
 	mkdir /tmp/out
 	mkdir /tmp/out/teste
-	fixaddr/fixaddr.csh teste/gmon.out /tmp/out
-	$(EXE) -i /tmp/out/teste/gmon.out.fixed -p /tmp/out/gmon
-	$(EXE) -i /tmp/out/teste/transplog.out.fixed -p /tmp/out/transp
+	fixaddr/fixaddr.csh teste/greedy.out /tmp/out
+	$(EXE) -i /tmp/out/teste/greedy.out.fixed -p /tmp/out/greedy
 	gnuplot /tmp/out/*.gp
 	ls /tmp/out/
 
