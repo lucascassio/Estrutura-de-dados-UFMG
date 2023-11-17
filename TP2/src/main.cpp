@@ -1,30 +1,22 @@
 #include "../include/ordena.hpp"
 #include "../include/graph.hpp"
 #include "../include/lista.hpp"
-#include "../include/memlog.hpp"
-#include "../include/msgassert.hpp"
 #include <iostream>
 
 using namespace std;
 
-int main() {
-    char lognome[100] = "/tmp/greedy.out";
-    int regmem = 1;
-    char o;
-    cin >> o; // Lê um caractere que representa o tipo de ordenação a ser usado.
-    int nVertices;
-    cin >> nVertices; // Lê o número de vértices do grafo.
-    Ordena ordena(nVertices); // Cria um objeto da classe Ordena com o número de vértices.
-    Grafo grafo(nVertices); // Cria um objeto da classe Grafo com o número de vértices.
-    Vertice* vertices = new Vertice[nVertices]; // Aloca espaço para o array de vértices.
+// Inicializa os vértices no grafo.
+void inicializarVertices(Grafo& grafo, Vertice*& vertices, int nVertices) {
+    vertices = new Vertice[nVertices];
 
-    // Loop para inicializar os vértices e inserir no grafo.
     for (int i = 0; i < nVertices; i++) {
-        vertices[i].v = i; // Atribui o índice do vértice.
-        grafo.InsereVertice(); // Insere um vértice no grafo.
+        vertices[i].v = i;
+        grafo.InsereVertice();
     }
+}
 
-    // Loop para ler as informações de vizinhos e arestas e inserir no grafo.
+// Lê os vizinhos de cada vértice e insere as arestas no grafo.
+void lerVizinhos(Grafo& grafo, int nVertices) {
     for (int i = 0; i < nVertices; i++) {
         int nVizinhos;
         cin >> nVizinhos;
@@ -32,54 +24,62 @@ int main() {
         for (int j = 0; j < nVizinhos; j++) {
             int vizinho;
             cin >> vizinho;
-            grafo.InsereAresta(i, vizinho); // Insere uma aresta entre o vértice 'i' e seu vizinho.
+            grafo.InsereAresta(i, vizinho);
         }
     }
+}
 
-    // Loop para ler e atribuir cores aos vértices no grafo.
+// Atribui cores aos vértices no grafo.
+void atribuirCores(Grafo& grafo, Vertice* vertices, int nVertices) {
     for (int i = 0; i < nVertices; i++) {
         int c;
         cin >> c;
-        vertices[i].c = c; // Atribui a cor ao vértice.
-        grafo.adicionaCor(i, c); // Atribui a cor ao vértice no grafo.
+        vertices[i].c = c;
+        grafo.adicionaCor(i, c);
     }
+}
 
-    iniciaMemLog(lognome);
-
-    if(regmem) ativaMemLog();
-    else desativaMemLog();
-
-    defineFaseMemLog(0);
-
-    // Escolhe e aplica o algoritmo de ordenação com base no caractere 'o'.
+// Aplica o algoritmo de ordenação com base no caractere 'o'.
+void aplicarAlgoritmoOrdenacao(Ordena& ordena, Vertice* vertices, char o) {
     if (o == 'b') {
-        defineFaseMemLog(1);
         ordena.bubblesort(vertices);
     } else if (o == 's') {
-        defineFaseMemLog(1);
         ordena.selectionsort(vertices);
     } else if (o == 'i') {
-        defineFaseMemLog(1);
         ordena.insertionsort(vertices);
     } else if (o == 'm') {
-        defineFaseMemLog(1);
         ordena.mergesort(vertices);
     } else if (o == 'p') {
-        defineFaseMemLog(1);
         ordena.heapsort(vertices);
     } else if (o == 'q') {
-        defineFaseMemLog(1);
         ordena.quicksort(vertices);
     } else if (o == 'y') {
-        defineFaseMemLog(1);
         ordena.mysort(vertices);
     }
+}
 
-    // Verifica se a coloração é válida para todos os vértices no grafo.
+int main() {
+    char o;
+    cin >> o;
+    int nVertices;
+    cin >> nVertices;
+
+    Ordena ordena(nVertices);
+    Grafo grafo(nVertices);
+    Vertice* vertices;
+
+    inicializarVertices(grafo, vertices, nVertices);
+    lerVizinhos(grafo, nVertices);
+    atribuirCores(grafo, vertices, nVertices);
+
+    aplicarAlgoritmoOrdenacao(ordena, vertices, o);
+
     for (int i = 0; i < nVertices; i++) {
+        // Verifica se a coloração é válida para todos os vértices no grafo.
         if (!grafo.ehGuloso(vertices[i].v, vertices[i].c)) {
             cout << 0 << endl;
-            return 1; // Se a coloração não é válida, exibe "0" e encerra o programa com erro.
+            delete[] vertices;
+            return 1;
         }
     }
 
@@ -89,6 +89,6 @@ int main() {
         cout << vertices[i].v << " ";
     }
 
-    delete[] vertices; // Libera a memória alocada para o array de vértices.
-    return 0; // Encerra o programa com sucesso.
+    delete[] vertices;
+    return 0;
 }
