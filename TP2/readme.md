@@ -40,13 +40,13 @@ O código consiste em várias funções que desempenham papéis específicos:
 - Se a coloração não é válida, o programa imprime "0" e encerra.
 
 ## Uso do Programa
-1. Compile o código.
+1. Compile o código com `make all`
 2. Execute o programa, fornecendo o caractere do algoritmo de ordenação e o número de vértices como entrada.
 3. Analise a saída para determinar se a coloração é gulosa ou não.
 
 ## Exemplo de Uso
 ```bash
-./seu_programa
+./tp2.out
 m 4
 2 1 3
 2 0 2
