@@ -1,4 +1,4 @@
-# Lógica Computacional: Problemas Clássicos e Variações
+# TP1 - Lógica Computacional: Problemas Clássicos e Variações
 
 Este repositório apresenta duas variantes de problemas clássicos em lógica computacional: a avaliação de expressões lógicas e uma variação do conhecido problema da satisfabilidade. A compreensão e solução desses problemas são fundamentais para o entendimento dos princípios básicos da lógica computacional.
 
