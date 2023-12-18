@@ -1,30 +1,25 @@
-# Makefile para compilar evalenum.c
+CC = g++
+LIBS = -lm -pg
+SRC = src
+OBJ = obj
+INC = include
+BIN = bin
+OBJS = $(OBJ)/main.o $(OBJ)/Set.o
+HDRS = $(INC)/Set.hpp
+CFLAGS = -I$(INC) -pg -c
 
-# Nome do executável
-TARGET = bin/pa9.out
+EXE = $(BIN)/pa10.out
 
-# Compilador
-CC = gcc
+all: $(EXE)
 
-# Flags de compilação
-CFLAGS = -Wall -Wextra -std=c11
+$(EXE): $(OBJS)
+	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
 
-# Diretórios
-SRCDIR = src
-OBJDIR = obj
-BINDIR = bin
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
 
-# Lista de objetos necessários para a compilação
-OBJS = $(OBJDIR)/evalenum.o
+$(OBJ)/Set.o: $(HDRS) $(SRC)/Set.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Set.o $(SRC)/Set.cpp
 
-# Regra padrão para a construção do executável
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
-
-# Regra para a compilação do arquivo fonte
-$(OBJDIR)/evalenum.o: $(SRCDIR)/evalenum.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Regra para limpar os arquivos objetos e o executável
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(EXE) $(OBJS)

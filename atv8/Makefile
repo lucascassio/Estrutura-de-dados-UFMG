@@ -4,11 +4,11 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/Set.o
-HDRS = $(INC)/Set.hpp
+OBJS = $(OBJ)/main.o $(OBJ)/avl.o
+HDRS = $(INC)/avl.hpp
 CFLAGS = -I$(INC) -pg -c
 
-EXE = $(BIN)/pa10.out
+EXE = $(BIN)/pa11.out
 
 all: $(EXE)
 
@@ -18,8 +18,8 @@ $(EXE): $(OBJS)
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
 
-$(OBJ)/Set.o: $(HDRS) $(SRC)/Set.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/Set.o $(SRC)/Set.cpp
+$(OBJ)/avl.o: $(HDRS) $(SRC)/avl.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/avl.o $(SRC)/avl.cpp
 
 clean:
 	rm -f $(EXE) $(OBJS)
