@@ -19,7 +19,7 @@ O código é composto por funções para leitura de matrizes, pontos e implement
 - Multiplica essa matriz pelo ponto fornecido e imprime o resultado na saída padrão.
 
 ## Uso do Programa
-1. Compile o código.
+1. Compile o código com `make all`
 2. Execute o programa e forneça o número de folhas e o número de operações.
 3. Para cada operação, forneça o caractere ('u' ou 'q') seguido dos parâmetros necessários.
    - Para operações de atualização ('u'), forneça a posição e os elementos da matriz.
